@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en" ng-app="calApp">
+<head>
+  <meta charset="utf-8">
+  <title>Y U NO GET BIG?</title>
+  <link rel="stylesheet" href="css/app.css"/>
+</head>
+
+<body ng-controller='FoodCtrl'>
+
+  <table border="0">
+    <tr ng-repeat="item in eaten">
+      <td>{{item.qty}}</td>
+      <td>{{item.name}}</td>
+    </tr>
+  </table>
+
+  <table border="0">
+    <tr>
+      <td>calories</td>
+      <td>{{calories}}</td>
+    </tr>
+    <tr>
+      <td>protein</td>
+      <td>{{protein}}</td>
+    </tr>
+    <tr>
+      <td>carbs</td>
+      <td>{{carbs}}</td>
+    </tr>
+    <tr>
+      <td>fat</td>
+      <td>{{fat}}</td>
+    </tr>
+  </table>
+
+  <div>
+    <button ng-repeat="item in items" type=button" ng-click="addItem(item)">
+      {{item.name}}
+    </button>
+  </div>
+
+  <script src="lib/angular/angular.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/directives.js"></script>
+</body>
+</html>
