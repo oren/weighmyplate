@@ -10,31 +10,38 @@
 
 <body ng-controller='FoodCtrl'>
 
-  <table border="0">
-    <tr ng-repeat="item in eaten">
-      <td>{{item.qty}}</td>
-      <td>{{item.name}}</td>
-    </tr>
-  </table>
+  <div class='total hero-unit'>
+    <table border="0" >
+      <tr>
+        <td>calories</td>
+        <td>{{calories}}</td>
+      </tr>
+      <tr>
+        <td>protein</td>
+        <td>{{protein}}</td>
+      </tr>
+      <tr>
+        <td>carbs</td>
+        <td>{{carbs}}</td>
+      </tr>
+      <tr>
+        <td>fat</td>
+        <td>{{fat}}</td>
+      </tr>
+    </table>
+  </div>
 
-  <table border="0">
-    <tr>
-      <td>calories</td>
-      <td>{{calories}}</td>
-    </tr>
-    <tr>
-      <td>protein</td>
-      <td>{{protein}}</td>
-    </tr>
-    <tr>
-      <td>carbs</td>
-      <td>{{carbs}}</td>
-    </tr>
-    <tr>
-      <td>fat</td>
-      <td>{{fat}}</td>
-    </tr>
-  </table>
+  <div class='eaten hero-unit' ng-show="foodEaten">
+    <table border="0">
+      <tr ng-repeat="item in eaten">
+        <td>{{item.qty}}</td>
+        <td>{{item.name}}</td>
+      </tr>
+    </table>
+  </div>
+
+
+  <div class='clearfix'></div>
 
   <div>
     <button ng-repeat="item in items" class='btn-primary' type=button" ng-click="addItem(item)">

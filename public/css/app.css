@@ -32,3 +32,25 @@
 button {
   margin: 2px;
 }
+
+.total {
+  float: left;
+  margin-right: 20px;
+}
+
+.total td:nth-child(2) {
+  float: right;
+  margin-left: 15px;
+}
+
+.eaten {
+  float: left;
+}
+
+.eaten td:nth-child(2) {
+  margin-left: 15px;
+}
+
+.hero-unit {
+  padding: 10px;
+}

@@ -18,6 +18,7 @@ function FoodCtrl($scope, $http) {
   $scope.protein = 0;
   $scope.carbs = 0;
   $scope.fat = 0;
+  $scope.foodEaten = false;
 
   $scope.eaten = [];
 
@@ -30,6 +31,7 @@ function FoodCtrl($scope, $http) {
   };
 
   function addEatenFood(food) {
+    $scope.foodEaten = true;
     var found = false;
     var i = 0;
     $scope.eaten.forEach(function(value) {
