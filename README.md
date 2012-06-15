@@ -7,7 +7,7 @@ install
 -------
 
     install node.js from http://nodejs.org/
-    install dependenciesby running npm install
+    npm install # install dependencies
 
 run
 ---
