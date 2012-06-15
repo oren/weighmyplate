@@ -6,7 +6,8 @@ fast, intuitive and mobile friendly calorie counting site
 install
 -------
 
-    Node.js - http://nodejs.org/
+    install node.js from http://nodejs.org/
+    install dependenciesby running npm install
 
 run
 ---
