@@ -1,6 +1,7 @@
 // save array of food
 module.exports.save = save;
 module.exports.remove = remove;
+module.exports.allFood = allFood;
 
 var host = process.env['MONGO_NODE_DRIVER_HOST'] != null ? process.env['MONGO_NODE_DRIVER_HOST'] : 'localhost';
 var port = process.env['MONGO_NODE_DRIVER_PORT'] != null ? process.env['MONGO_NODE_DRIVER_PORT'] : 27017;
@@ -36,6 +37,20 @@ function remove(callback) {
       if (err) { console.warn(err.message); }
       else {
         callback(null, count);
+      }
+    });
+  });
+};
+
+// get all food
+function allFood(callback) {
+  new mongodb.Db(dbName, server, {}).open(function (error, client) {
+    if (error) throw error;
+    var collection = new mongodb.Collection(client, 'food');
+    collection.find().toArray(function(err, results) {
+      if (err) { console.warn(err.message); }
+      else {
+        callback(null, results);
       }
     });
   });
