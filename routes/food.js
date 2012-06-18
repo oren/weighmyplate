@@ -11,7 +11,6 @@ function food (req, res) {
       res.statusCode = 500;
       return res.end();
     } else {
-      console.log('results',items);
       res.end(JSON.stringify(items));
     }
   });

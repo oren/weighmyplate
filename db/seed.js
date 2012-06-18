@@ -50,13 +50,17 @@ function addFood() {
     // add_food('steel cut oats 30g', 113, 3.8, 20.3, 1.9) #calorieking
   ];
 
-  food.save(items, function(err, data){
-    if(err) {
-      console.log('Error while adding food to DB', err);
-    } else {
-      console.log('Food was added to DB', data);
-    }
-  });
+  setTimeout(foo, 2000);
+
+  function foo() {
+    food.save(items, function(err, data){
+      if(err) {
+        console.log('Error while adding food to DB', err);
+      } else {
+        console.log('Food was added to DB', data.map(function(value) { return value.name }));
+      }
+    });
+  };
 };
 
 addFood();
