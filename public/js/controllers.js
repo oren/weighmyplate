@@ -19,15 +19,30 @@ function FoodCtrl($scope, $http) {
   $scope.carbs = 0;
   $scope.fat = 0;
   $scope.foodEaten = false;
-
+  $scope.showAdd = true;
+  $scope.foodHtmml = '';
   $scope.eaten = [];
 
-  $scope.addItem = function(item){
+  $scope.addItem = function(item) {
     $scope.calories += item.cal;
     $scope.protein += item.p;
     $scope.carbs += item.c;
     $scope.fat += item.f;
     addEatenFood(item.name);
+  };
+
+  $scope.addFood = function() {
+    $scope.showAdd = false;
+    var data = {name: 'egg'};
+    $scope.foodHtml = new EJS({url: '/templates/food.ejs'}).render(data);
+  };
+
+  $scope.addFoodToDB = function() {
+    console.log('add to db'); 
+  };
+
+  $scope.cancelAdd = function() {
+    console.log('cancel'); 
   };
 
   function addEatenFood(food) {
@@ -46,5 +61,6 @@ function FoodCtrl($scope, $http) {
       $scope.eaten.push({name: food, qty: 1});
     };
   }
+
 }
 
