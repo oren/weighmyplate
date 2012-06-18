@@ -1,7 +1,11 @@
 Y U NO BIG?
 ===========
 
-fast, intuitive and mobile friendly calorie counting site
+Calorie counting should be quick and get out of your way.  
+the current websites/apps sucks since it takes too much time and not always intuitive to use.  
+this site is my attempt in makeing things simpler.
+
+[The Website](http://108.227.82.183:3000)
 
 ![Y U NO BIG?](http://images2.fanpop.com/image/photos/11400000/mini-cat-cats-11415636-159-142.jpg)
 
@@ -24,7 +28,7 @@ get big
 tech stack
 ----------
 
-* Node.js
-* MongoDB
-* AngularJS
+* Node.js - server side
+* MongoDB - DB
+* AngularJS - client side MVC framework
 
