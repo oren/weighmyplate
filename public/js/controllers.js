@@ -3,16 +3,7 @@
 /* Controllers */
 
 function FoodCtrl($scope, $http) {
-  $http({method: 'GET', url: '/food'}).
-    success(function(data, status, headers, config) {
-      $scope.items = data;
-    }).
-    error(function(data, status, headers, config) {
-      // called asynchronously if an error occurs
-      // or server returns response with status
-      // code outside of the <200, 400) range
-      console.log('error', status);
-    });
+  getAllFood($scope, $http);
 
   $scope.calories = 0;
   $scope.protein = 0;
@@ -23,6 +14,7 @@ function FoodCtrl($scope, $http) {
   $scope.addButton = true;
   $scope.eaten = [];
 
+  // add numbers to daily total
   $scope.addItem = function(item) {
     $scope.calories += item.cal;
     $scope.protein += item.p;
@@ -45,6 +37,21 @@ function FoodCtrl($scope, $http) {
     $scope.showAdd = false;
   };
 
+  // get all food from DB
+  function getAllFood($scope, $http) {
+    $http({method: 'GET', url: '/food'}).
+      success(function(data, status, headers, config) {
+        $scope.items = data;
+      }).
+      error(function(data, status, headers, config) {
+        // called asynchronously if an error occurs
+        // or server returns response with status
+        // code outside of the <200, 400) range
+        console.log('error', status);
+      });
+  };
+
+  // update food eaten box
   function addEatenFood(food) {
     $scope.foodEaten = true;
     var found = false;
@@ -60,7 +67,7 @@ function FoodCtrl($scope, $http) {
     if(found === false) {
       $scope.eaten.push({name: food, qty: 1});
     };
-  }
+  };
 
 }
 
