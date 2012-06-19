@@ -8,6 +8,7 @@ function FoodCtrl($scope, $http) {
 
   // add numbers to daily total
   $scope.addItem = function(item) {
+    addEatenFoodToDB($http, item);
     $scope.calories += item.cal;
     $scope.protein += item.p;
     $scope.carbs += item.c;
@@ -34,6 +35,20 @@ function FoodCtrl($scope, $http) {
     $http({method: 'GET', url: '/food'}).
       success(function(data, status, headers, config) {
         $scope.items = data;
+      }).
+      error(function(data, status, headers, config) {
+        // called asynchronously if an error occurs
+        // or server returns response with status
+        // code outside of the <200, 400) range
+        console.log('error', status);
+      });
+  };
+
+  // add eaten food to DB
+  function addEatenFoodToDB($http, foodEaten) {
+    $http({method: 'POST', url: '/food', data: foodEaten}).
+      success(function(data, status, headers, config) {
+        console.log('success', status);
       }).
       error(function(data, status, headers, config) {
         // called asynchronously if an error occurs
