@@ -19,8 +19,8 @@ function FoodCtrl($scope, $http) {
   $scope.carbs = 0;
   $scope.fat = 0;
   $scope.foodEaten = false;
-  $scope.showAdd = true;
-  $scope.foodHtmml = '';
+  $scope.showAdd = false;
+  $scope.addButton = true;
   $scope.eaten = [];
 
   $scope.addItem = function(item) {
@@ -32,9 +32,8 @@ function FoodCtrl($scope, $http) {
   };
 
   $scope.addFood = function() {
-    $scope.showAdd = false;
-    var data = {name: 'egg'};
-    $scope.foodHtml = new EJS({url: '/templates/food.ejs'}).render(data);
+    $scope.addButton = false;
+    $scope.showAdd = true;
   };
 
   $scope.addFoodToDB = function() {
@@ -42,7 +41,8 @@ function FoodCtrl($scope, $http) {
   };
 
   $scope.cancelAdd = function() {
-    console.log('cancel'); 
+    $scope.addButton = true;
+    $scope.showAdd = false;
   };
 
   function addEatenFood(food) {
