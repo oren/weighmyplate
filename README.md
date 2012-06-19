@@ -15,6 +15,11 @@ install
     install node.js from http://nodejs.org/
     npm install # install dependencies
 
+setup
+-----
+
+    make db-seed  # load food to DB
+
 run
 ---
 
