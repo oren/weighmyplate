@@ -4,15 +4,7 @@
 
 function FoodCtrl($scope, $http) {
   getAllFood($scope, $http);
-
-  $scope.calories = 0;
-  $scope.protein = 0;
-  $scope.carbs = 0;
-  $scope.fat = 0;
-  $scope.foodEaten = false;
-  $scope.showAdd = false;
-  $scope.addButton = true;
-  $scope.eaten = [];
+  initState($scope);
 
   // add numbers to daily total
   $scope.addItem = function(item) {
@@ -49,6 +41,17 @@ function FoodCtrl($scope, $http) {
         // code outside of the <200, 400) range
         console.log('error', status);
       });
+  };
+
+  function initState($scope) {
+    $scope.calories = 0;
+    $scope.protein = 0;
+    $scope.carbs = 0;
+    $scope.fat = 0;
+    $scope.foodEaten = false;
+    $scope.showAdd = false;
+    $scope.addButton = true;
+    $scope.eaten = [];
   };
 
   // update food eaten box
