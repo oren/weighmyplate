@@ -17,8 +17,25 @@ function food (req, res) {
 };
 
 function addEatenFood(req, res) {
-  console.log('add eaten food');
-  res.end();
+  var payload = [];
+  req.setEncoding('utf8');
+
+  req.on('data', function (data) {
+    payload.push(data);
+  });
+
+  req.on('end', function () {
+    db.addEatenFood(payload[0], function(err, items){ 
+      if(err) {
+        res.statusCode = 500;
+        res.end();
+      } else {
+        res.end();
+      }
+    });
+    res.end();
+  });
+
 };
 
 function getAllFood(req, res) {
@@ -31,3 +48,4 @@ function getAllFood(req, res) {
     }
   });
 };
+
