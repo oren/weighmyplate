@@ -1,4 +1,5 @@
 // save array of food
+
 module.exports.save = save;
 module.exports.remove = remove;
 module.exports.allFood = allFood;
@@ -48,9 +49,21 @@ function remove(callback) {
 // get all food
 function allFood(callback) {
   food.find().toArray(function(err, results) {
-    if (err) { console.warn(err.message); }
+    if (err) { console.warn(err.message); 
+      callback(err);
+    }
     else {
-      callback(null, results);
+      // callback(null, results);
+      foodResult = results;
+      day.find().toArray(function(err, results) {
+        if (err) { console.warn(err.message); 
+          callback(err);
+        }
+        else {
+          console.log('results', results);
+          callback(null, {food: foodResult, eatenFood: results});
+        }
+      });
     }
   });
 };
@@ -58,7 +71,7 @@ function allFood(callback) {
 // add eaten food to a day
 function addEatenFood(food, callback) {
   console.log('food', food);
-  day.insert({'key1': 'hello'}, {safe:true}, function(err, objects) {
+  day.insert(food, {safe:true}, function(err, objects) {
     if (err) console.warn(err.message);
     if (err && err.message.indexOf('E11000 ') !== -1) {
       // this _id was already inserted in the database

@@ -17,15 +17,15 @@ function food (req, res) {
 };
 
 function addEatenFood(req, res) {
-  var payload = [];
+  var payload = '';
   req.setEncoding('utf8');
 
   req.on('data', function (data) {
-    payload.push(data);
+    payload += data;
   });
 
   req.on('end', function () {
-    db.addEatenFood(payload[0], function(err, items){ 
+    db.addEatenFood(JSON.parse(payload), function(err, items){ 
       if(err) {
         res.statusCode = 500;
         res.end();
@@ -39,6 +39,7 @@ function addEatenFood(req, res) {
 };
 
 function getAllFood(req, res) {
+  var result = {};
   db.allFood(function(err, items){ 
     if(err) {
       res.statusCode = 500;

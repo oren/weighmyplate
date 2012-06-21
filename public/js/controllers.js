@@ -34,7 +34,10 @@ function FoodCtrl($scope, $http) {
   function getAllFood($scope, $http) {
     $http({method: 'GET', url: '/food'}).
       success(function(data, status, headers, config) {
-        $scope.items = data;
+
+        $scope.foodEaten = true;
+        $scope.items = data.food;
+        $scope.eaten = data.eatenFood;
       }).
       error(function(data, status, headers, config) {
         // called asynchronously if an error occurs
@@ -74,6 +77,8 @@ function FoodCtrl($scope, $http) {
     $scope.foodEaten = true;
     var found = false;
     var i = 0;
+
+    // add qty to food that was already eaten
     $scope.eaten.forEach(function(value) {
       if(food === value.name) {
         $scope.eaten[i].qty += 1;
@@ -82,6 +87,7 @@ function FoodCtrl($scope, $http) {
       i += 1;
     });
 
+    // first time eating this food
     if(found === false) {
       $scope.eaten.push({name: food, qty: 1});
     };
