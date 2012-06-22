@@ -16,7 +16,10 @@ var food = null;
 var day = null;
 
 db.open(function(err, db) {
-  if(!err) {
+  if(err) {
+    console.log('error opening mongo. make sure mongo is running');
+    process.exit(1);
+  } else {
     console.log("connected to mongo");
     food = new mongo.Collection(db, 'food');
     day = new mongo.Collection(db, 'day');
