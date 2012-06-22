@@ -1,4 +1,4 @@
-db = require('../food.js');
+db = require('../db/db.js');
 module.exports = food;
 
 // GET /food -   get all food from DB

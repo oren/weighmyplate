@@ -1,4 +1,4 @@
-var food = require('../food.js');
+var food = require('./db.js');
 
 setTimeout(foo, 2000);
     
