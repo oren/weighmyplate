@@ -63,7 +63,6 @@ function allFood(callback) {
           callback(err);
         }
         else {
-          console.log('results', results);
           callback(null, {food: foodResult, eatenFood: results});
         }
       });

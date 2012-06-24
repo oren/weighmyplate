@@ -10,6 +10,10 @@
 
 <body ng-controller='FoodCtrl'>
 
+  <a href="#" id="browserid" title="Sign-in with BrowserID" ng-click='signIn()'>  
+    <img src="/images/sign_in_blue.png" alt="Sign in">  
+  </a>
+
   <div class='total hero-unit'>
     <table border="0" >
       <tr>
@@ -64,7 +68,7 @@
     <button type="button" class="btn" ng-click="cancelAdd()">Cancel</button>
   </form>
 
-
+  <script src="https://browserid.org/include.js" type="text/javascript"></script>  
   <script src="lib/angular/angular-1.0.0.min.js"></script>
   <script src="js/app.js"></script>
   <script src="js/services.js"></script>

@@ -30,6 +30,11 @@ function FoodCtrl($scope, $http) {
     $scope.showAdd = false;
   };
 
+  $scope.signIn = function() {
+    navigator.id.get(gotAssertion);  
+    return false; 
+  };
+
   // get all food from DB
   function getAllFood($scope, $http) {
     $http({method: 'GET', url: '/food'}).
@@ -93,5 +98,34 @@ function FoodCtrl($scope, $http) {
     };
   };
 
+  function gotAssertion(assertion) {
+    // got an assertion, now send it up to the server for verification
+    if (assertion !== null) {
+      $http({method: 'POST', url: '/login', data: { assertion: assertion }}).
+        success(function(data, status, headers, config) {
+          if (data === null) {
+            loggedOut();
+          } else {
+            loggedIn(data);
+          }
+        }).
+        error(function(data, status, headers, config) {
+          // called asynchronously if an error occurs
+          // or server returns response with status
+          // code outside of the <200, 400) range
+          console.log('login failure', status);
+        });
+    } else {
+      loggedOut();
+    }
+  };
+
+  function loggedIn(data) {
+    console.log('logout the user. data:', data);
+  };
+
+  function loggedIn(data) {
+    console.log('the user logged in. data:', data);
+  };
 }
 

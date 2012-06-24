@@ -14,6 +14,7 @@ Templar.loadFolder('./templates')
 
 router.define( '/', require('./routes/home.js') );
 router.define( '/food', require('./routes/food.js') );
+router.define( '/login', require('./routes/login.js') );
 // route static files
 router.define( '/*', require('./routes/static.js') )
 
