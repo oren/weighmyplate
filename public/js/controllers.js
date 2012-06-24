@@ -101,9 +101,13 @@ function FoodCtrl($scope, $http) {
   function gotAssertion(assertion) {
     // got an assertion, now send it up to the server for verification
     if (assertion !== null) {
-      $http({method: 'POST', url: '/login', data: { assertion: assertion }}).
+      $http({method: 'POST', url: '/login', data: assertion }).
         success(function(data, status, headers, config) {
           if (data === null) {
+            console.log("couldn't login. no data returned");
+            loggedOut();
+          } else if(data.status === 'failure') {
+            console.log("couldn't login.", data.reason);
             loggedOut();
           } else {
             loggedIn(data);
@@ -120,12 +124,13 @@ function FoodCtrl($scope, $http) {
     }
   };
 
-  function loggedIn(data) {
-    console.log('logout the user. data:', data);
+  function loggedOut() {
+    console.log('logout the user');
   };
 
   function loggedIn(data) {
     console.log('the user logged in. data:', data);
+    $scope.hideSignup = true;
   };
 }
 

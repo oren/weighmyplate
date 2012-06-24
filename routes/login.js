@@ -20,12 +20,14 @@ function tryLogin(req, res) {
     assertion += data;
   });
 
-  req.on('end', function (data) {
-    assertion += data;
+  req.on('end', function () {
     verifyAssertion(assertion, res);
   });
 };
 
+
+// POST to browserID and get status and email in a json format
+//
 // curl -d "assertion=<ASSERTION>&audience=https://mysite.com" "https://browserid.org/verify"
 // {
 //   "status": "okay",
@@ -47,10 +49,14 @@ function verifyAssertion(assertion, res) {
   request(options, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       console.log('body', body) 
+      res.writeHead(200, {
+        'Set-Cookie': 'loggedin=true',
+        'Content-Type': 'text/plain'
+      });
     } else {
       console.log('body', body);
     }
 
-    res.end();
+    res.end(body);
   })
 };

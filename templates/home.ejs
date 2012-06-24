@@ -10,7 +10,8 @@
 
 <body ng-controller='FoodCtrl'>
 
-  <a href="#" id="browserid" title="Sign-in with BrowserID" ng-click='signIn()'>  
+  <input type='hidden' ng-model='hideSignup' value='<%= loggedin %>' />
+  <a href="#" id="browserid" title="Sign-in with BrowserID" ng-click='signIn()' ng-hide='hideSignup'>  
     <img src="/images/sign_in_blue.png" alt="Sign in">  
   </a>
 
