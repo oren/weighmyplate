@@ -2,9 +2,9 @@
 
 /* Controllers */
 
-function FoodCtrl($scope, $http) {
+function FoodCtrl($scope, $http, $cookies) {
   getAllFood($scope, $http);
-  initState($scope);
+  initState($scope, $cookies);
 
   // add numbers to daily total
   $scope.addItem = function(item) {
@@ -66,7 +66,9 @@ function FoodCtrl($scope, $http) {
       });
   };
 
-  function initState($scope) {
+  function initState($scope, $cookies) {
+    $scope.hideSignup = $cookies.loggedin;
+    console.log('loggedin', $scope.hideSignup);
     $scope.calories = 0;
     $scope.protein = 0;
     $scope.carbs = 0;
