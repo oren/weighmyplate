@@ -1,7 +1,27 @@
-var food = require('./db.js');
+var host = process.env['MONGO_NODE_DRIVER_HOST'] != null ? process.env['MONGO_NODE_DRIVER_HOST'] : 'localhost';
+var port = process.env['MONGO_NODE_DRIVER_PORT'] != null ? process.env['MONGO_NODE_DRIVER_PORT'] : 27017;
+var dbName = process.env['MONGO_NODE_DRIVER_DB_NAME'] != null ? process.env['MONGO_NODE_DRIVER_DB_NAME'] : 'yunobig-develapment';
 
-function addFood() {
-  var items = [
+var mongo = require('mongodb');
+var server = new mongo.Server(host, port, {});
+var db = new mongo.Db(dbName, server);
+var user = null;
+
+db.open(function(err, db) {
+  if(err) {
+    console.log('error opening mongo. make sure mongo is running');
+    process.exit(1);
+  } else {
+    console.log("connected to mongo");
+    users = new mongo.Collection(db, 'users');
+    addUser();
+  }
+});
+
+function addUser() {
+  var user = {};
+  user.name = 'jhon';
+  user.food = [
   { name: 'yogurt 1 cup', cal: 120, p: 22, c:5 , f:0 },
   { name: 'cottage 100p', cal: 88, p: 12.32, c:3.52, f:2.2 },
   { name: 'egg', cal: 78, p: 6.3, c:0.6, f:5.3 },
@@ -50,17 +70,12 @@ function addFood() {
     // add_food('steel cut oats 30g', 113, 3.8, 20.3, 1.9) #calorieking
   ];
 
-  setTimeout(foo, 2000);
-
-  function foo() {
-    food.save(items, function(err, data){
-      if(err) {
-        console.log('Error while adding food to DB', err);
-      } else {
-        console.log('Food was added to DB', data.map(function(value) { return value.name }));
-      }
-    });
-  };
+  users.save(user, function(err, data){
+    if(err) {
+      console.log('Error while adding food to DB', err);
+    } else {
+      console.log('test user was added to DB', data);
+    }
+  });
 };
 
-addFood();

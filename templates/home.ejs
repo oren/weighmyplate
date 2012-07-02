@@ -14,27 +14,8 @@
     <img src="/images/sign_in_blue.png" alt="Sign in">  
   </a>
 
-  <div class='total hero-unit'>
-    <table border="0" >
-      <tr>
-        <td>calories</td>
-        <td>{{calories}}</td>
-      </tr>
-      <tr>
-        <td>protein</td>
-        <td>{{protein}}</td>
-      </tr>
-      <tr>
-        <td>carbs</td>
-        <td>{{carbs}}</td>
-      </tr>
-      <tr>
-        <td>fat</td>
-        <td>{{fat}}</td>
-      </tr>
-    </table>
-  </div>
 
+  <ng:include src="'templates/total.ejs'"></ng:include>
 
   <div class='eaten hero-unit' ng-show="foodEaten">
     <table border="0">
