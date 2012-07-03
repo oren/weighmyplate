@@ -19,8 +19,11 @@ db.open(function(err, db) {
 });
 
 function addUser() {
-  var user = {};
-  user.name = 'jhon';
+  var user = {
+    'name': 'jhon',
+    'email': 'test@gmail.com'
+  };
+
   user.food = [
   { name: 'yogurt 1 cup', cal: 120, p: 22, c:5 , f:0 },
   { name: 'cottage 100p', cal: 88, p: 12.32, c:3.52, f:2.2 },

@@ -3,7 +3,8 @@
 /* Controllers */
 
 function FoodCtrl($scope, $http, $cookies) {
-  getAllFood($scope, $http);
+  // getAllFood($scope, $http);
+  getUser('test@gmail.com', $scope, $http);
   initState($scope, $cookies);
 
   // add numbers to daily total
@@ -33,6 +34,23 @@ function FoodCtrl($scope, $http, $cookies) {
   $scope.signIn = function() {
     navigator.id.get(gotAssertion);  
     return false; 
+  };
+
+  // get user from DB
+  function getUser(email, $scope, $http) {
+    $http({method: 'GET', url: '/user'}).
+      success(function(data, status, headers, config) {
+
+        $scope.foodEaten = true;
+        $scope.items = data.user.food;
+        $scope.eaten = data.user.eatenFood;
+      }).
+      error(function(data, status, headers, config) {
+        // called asynchronously if an error occurs
+        // or server returns response with status
+        // code outside of the <200, 400) range
+        console.log('error', status);
+      });
   };
 
   // get all food from DB

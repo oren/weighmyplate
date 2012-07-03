@@ -12,8 +12,30 @@ var templarOptions = { engine: config.engine, folder: config.templates };
 var router = new mapleTree.RouteTree();
 Templar.loadFolder('./templates')
 
+var webSitePort = process.env.PORT || config.port;
+
+// db stuff
+var mongoHost = process.env['MONGO_NODE_DRIVER_HOST'] != null ? process.env['MONGO_NODE_DRIVER_HOST'] : 'localhost';
+var mongoPort = process.env['MONGO_NODE_DRIVER_PORT'] != null ? process.env['MONGO_NODE_DRIVER_PORT'] : 27017;
+var mongoDbName = process.env['MONGO_NODE_DRIVER_DB_NAME'] != null ? process.env['MONGO_NODE_DRIVER_DB_NAME'] : 'yunobig-develapment';
+
+var mongo = require('mongodb');
+var server = new mongo.Server(mongoHost, mongoPort, {});
+var db = new mongo.Db(mongoDbName, server);
+var usersCollection = null;
+
+db.open(function(err, db) {
+  if(err) {
+    console.log('error opening mongo. make sure mongo is running');
+    process.exit(1);
+  } else {
+    console.log("connected to mongo");
+    usersCollection = new mongo.Collection(db, 'food');
+  }
+});
+
 router.define( '/', require('./routes/home.js') );
-router.define( '/food', require('./routes/food.js') );
+router.define( '/user', require('./routes/user.js') );
 router.define( '/login', require('./routes/login.js') );
 // route static files
 router.define( '/*', require('./routes/static.js') )
@@ -22,8 +44,23 @@ router.define( '/*', require('./routes/static.js') )
 http.createServer(function(req, res) {
   res.error = ErrorPage(req, res, {});
   res.template = Templar(req, res, templarOptions);
-
   router.match(req.url).fn(req, res);
+}).listen(webSitePort);
 
-}).listen(process.env.PORT || config.port);
+console.log('website running. port ' + webSitePort);
 
+// function user (req, res) {
+//   console.log('in route. user function');
+//   console.log('collection', usersCollection);
+//   switch(req.method) {
+//     case 'GET':
+//       return res.end(JSON.stringify({'food':[], 'foodEaten':[], 'user':{}}));
+//       // return getUser(req, res);
+//       break;
+//     case 'POST':
+//       // return addEatenFood(req, res);
+//       break;
+//     default: 
+//       return res.error(405);
+//   }
+// };
