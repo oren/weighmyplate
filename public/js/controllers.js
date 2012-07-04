@@ -41,9 +41,10 @@ function FoodCtrl($scope, $http, $cookies) {
     $http({method: 'GET', url: '/user'}).
       success(function(data, status, headers, config) {
 
+        console.log('data', data);
         $scope.foodEaten = true;
-        $scope.items = data.user.food;
-        $scope.eaten = data.user.eatenFood;
+        $scope.items = data.food;
+        // $scope.eaten = data.eatenFood;
       }).
       error(function(data, status, headers, config) {
         // called asynchronously if an error occurs

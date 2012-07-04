@@ -3,9 +3,7 @@ module.exports = user;
 
 // GET /food -   get all food from DB
 // or POST /food -   add new eaten food to DB
-function user (req, res) {
-  console.log('in route. user function');
-  console.log('collection', usersCollection);
+function user(req, res) {
   switch(req.method) {
     case 'GET':
       // return res.end(JSON.stringify({'food':[], 'foodEaten':[], 'user':{}}));
@@ -17,6 +15,19 @@ function user (req, res) {
     default: 
       return res.error(405);
   }
+};
+
+// get user from db
+function getUser(req, res) {
+  var result = {};
+  users.getUser(function(err, user){ 
+    if(err) {
+      res.statusCode = 500;
+      res.end();
+    } else {
+      res.end(JSON.stringify(user));
+    }
+  });
 };
 
 // function addEatenFood(req, res) {
@@ -40,18 +51,3 @@ function user (req, res) {
 //   });
 // 
 // };
-
-
-function getUser(req, res) {
-  console.log('in route');
-  var result = {};
-  users.getUser(function(err, user){ 
-    if(err) {
-      res.statusCode = 500;
-      res.end();
-    } else {
-      res.end(JSON.stringify(user));
-    }
-  });
-};
-

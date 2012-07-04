@@ -30,15 +30,16 @@ db.open(function(err, db) {
     process.exit(1);
   } else {
     console.log("connected to mongo");
-    usersCollection = new mongo.Collection(db, 'food');
+    usersCollection = new mongo.Collection(db, 'users');
+    module.usersCollection = usersCollection;
+    router.define( '/user', require('./routes/user.js') );
+    router.define( '/', require('./routes/home.js') );
+    router.define( '/login', require('./routes/login.js') );
+    // route static files
+    router.define( '/*', require('./routes/static.js') )
   }
 });
 
-router.define( '/', require('./routes/home.js') );
-router.define( '/user', require('./routes/user.js') );
-router.define( '/login', require('./routes/login.js') );
-// route static files
-router.define( '/*', require('./routes/static.js') )
 
 // request goes here
 http.createServer(function(req, res) {
@@ -48,19 +49,3 @@ http.createServer(function(req, res) {
 }).listen(webSitePort);
 
 console.log('website running. port ' + webSitePort);
-
-// function user (req, res) {
-//   console.log('in route. user function');
-//   console.log('collection', usersCollection);
-//   switch(req.method) {
-//     case 'GET':
-//       return res.end(JSON.stringify({'food':[], 'foodEaten':[], 'user':{}}));
-//       // return getUser(req, res);
-//       break;
-//     case 'POST':
-//       // return addEatenFood(req, res);
-//       break;
-//     default: 
-//       return res.error(405);
-//   }
-// };
