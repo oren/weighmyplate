@@ -2,7 +2,7 @@ module.exports.getUser = getUser;
 
 // get all food
 function getUser(callback) {
-  require.main.usersCollection.findOne({ 'email':'test@gmail.com' }, function(err, user) {
+  require.main.exports.usersCollection.findOne({ 'email':'test@gmail.com' }, function(err, user) {
     if (err) { console.warn(err.message); 
       callback(err);
     }

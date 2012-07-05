@@ -4,7 +4,6 @@
 
 function FoodCtrl($scope, $http, $cookies) {
   // getAllFood($scope, $http);
-  getUser('test@gmail.com', $scope, $http);
   initState($scope, $cookies);
 
   // add numbers to daily total
@@ -86,8 +85,7 @@ function FoodCtrl($scope, $http, $cookies) {
   };
 
   function initState($scope, $cookies) {
-    $scope.hideSignup = $cookies.loggedin;
-    console.log('loggedin', $scope.hideSignup);
+    $scope.hideSignup = $cookies.loggedin; //undefined if no cookie
     $scope.calories = 0;
     $scope.protein = 0;
     $scope.carbs = 0;
@@ -152,6 +150,7 @@ function FoodCtrl($scope, $http, $cookies) {
   function loggedIn(data) {
     console.log('the user logged in. data:', data);
     $scope.hideSignup = true;
+    getUser(data.email, $scope, $http);
   };
 }
 

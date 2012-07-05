@@ -31,7 +31,7 @@ db.open(function(err, db) {
   } else {
     console.log("connected to mongo");
     usersCollection = new mongo.Collection(db, 'users');
-    module.usersCollection = usersCollection;
+    module.exports.usersCollection = usersCollection;
     router.define( '/user', require('./routes/user.js') );
     router.define( '/', require('./routes/home.js') );
     router.define( '/login', require('./routes/login.js') );
