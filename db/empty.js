@@ -13,7 +13,7 @@ db.open(function(err, db) {
     process.exit(1);
   } else {
     console.log("connected to mongo");
-    user = new mongo.Collection(db, 'user');
+    user = new mongo.Collection(db, 'users');
     foo();
   }
 });
@@ -23,9 +23,11 @@ function foo() {
   user.remove(function(err, count) {
     if(err) {
       console.log('Error while removeing food collection', err);
+      process.exit(1);
     }
     else {
       console.log('users collection is empty');
+      process.exit(0);
     };
   });
 };

@@ -76,8 +76,10 @@ function addUser() {
   users.save(user, function(err, data){
     if(err) {
       console.log('Error while adding food to DB', err);
+      process.exit(1);
     } else {
       console.log('test user was added to DB', data);
+      process.exit(0);
     }
   });
 };

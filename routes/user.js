@@ -13,8 +13,7 @@ function user(req, res) {
       // return addEatenFood(req, res);
       break;
     case 'PUT':
-      // return addEatenFood(req, res);
-      res.end();
+      return addEatenFood(req, res);
       break;
     default: 
       return res.error(405);
@@ -34,24 +33,27 @@ function getUser(req, res) {
   });
 };
 
-// function addEatenFood(req, res) {
-//   var payload = '';
-//   req.setEncoding('utf8');
-// 
-//   req.on('data', function (data) {
-//     payload += data;
-//   });
-// 
-//   req.on('end', function () {
-//     db.addEatenFood(JSON.parse(payload), function(err, items){ 
-//       if(err) {
-//         res.statusCode = 500;
-//         res.end();
-//       } else {
-//         res.end();
-//       }
-//     });
-//     res.end();
-//   });
-// 
-// };
+function addEatenFood(req, res) {
+  var payload = '';
+  req.setEncoding('utf8');
+
+  req.on('data', function (data) {
+    payload += data;
+  });
+
+  req.on('end', function () {
+    var userID = 1;
+
+    users.addEatenFood(userID, JSON.parse(payload), function(err, user){ 
+      if(err) {
+        res.statusCode = 500;
+        res.end();
+      } else {
+        console.log('user', user);
+        res.end();
+      }
+    });
+    res.end();
+  });
+
+};

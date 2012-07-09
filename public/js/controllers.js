@@ -10,12 +10,12 @@ function FoodCtrl($scope, $http, $cookies) {
 
   // add numbers to daily total
   $scope.addItem = function(item) {
-    addEatenFoodToDB($http, item);
     $scope.calories += item.cal;
     $scope.protein += item.p;
     $scope.carbs += item.c;
     $scope.fat += item.f;
     addEatenFood(item.name);
+    addEatenFoodToDB($http, $scope.eaten);
   };
 
   $scope.addFood = function() {
