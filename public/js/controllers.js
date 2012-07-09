@@ -3,8 +3,10 @@
 /* Controllers */
 
 function FoodCtrl($scope, $http, $cookies) {
-  // getAllFood($scope, $http);
   initState($scope, $cookies);
+
+  // comment when online
+  getUser('test@gmail.com', $scope, $http);
 
   // add numbers to daily total
   $scope.addItem = function(item) {
@@ -41,9 +43,8 @@ function FoodCtrl($scope, $http, $cookies) {
       success(function(data, status, headers, config) {
 
         console.log('data', data);
-        $scope.foodEaten = true;
         $scope.items = data.food;
-        // $scope.eaten = data.eatenFood;
+        $scope.eaten = (data.eatenFood === undefined) ? [] : data.eatenFood;
       }).
       error(function(data, status, headers, config) {
         // called asynchronously if an error occurs
@@ -60,7 +61,8 @@ function FoodCtrl($scope, $http, $cookies) {
 
         $scope.foodEaten = true;
         $scope.items = data.food;
-        $scope.eaten = data.eatenFood;
+        console.log('eatenFood', data.eatenFood);
+        $scope.eaten = (data.eatenFood === undefined) ? [] : data.eatenFood;
       }).
       error(function(data, status, headers, config) {
         // called asynchronously if an error occurs
@@ -72,7 +74,7 @@ function FoodCtrl($scope, $http, $cookies) {
 
   // add eaten food to DB
   function addEatenFoodToDB($http, foodEaten) {
-    $http({method: 'POST', url: '/food', data: foodEaten}).
+    $http({method: 'PUT', url: '/user', data: foodEaten}).
       success(function(data, status, headers, config) {
         console.log('success', status);
       }).

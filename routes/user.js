@@ -12,6 +12,10 @@ function user(req, res) {
     case 'POST':
       // return addEatenFood(req, res);
       break;
+    case 'PUT':
+      // return addEatenFood(req, res);
+      res.end();
+      break;
     default: 
       return res.error(405);
   }
