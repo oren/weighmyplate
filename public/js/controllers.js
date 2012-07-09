@@ -41,13 +41,13 @@ function FoodCtrl($scope, $http, $cookies) {
   function getUser(email, $scope, $http) {
     $http({method: 'GET', url: '/user'}).
       success(function(data, status, headers, config) {
-        console.log('data', data);
 
         $scope.items = data.food;
         if (data.foodEaten !== undefined && data.foodEaten.length > 0) {
           $scope.foodEaten = true;
         }
         $scope.eaten = (data.foodEaten === undefined) ? [] : data.foodEaten;
+        setNewTotal($scope);
       }).
       error(function(data, status, headers, config) {
         // called asynchronously if an error occurs
@@ -56,6 +56,16 @@ function FoodCtrl($scope, $http, $cookies) {
         console.log('error', status);
       });
   };
+
+  function setNewTotal($scope) {
+    var total = calculateTotal($scope.eaten);
+
+    $scope.calories = total.calories;
+    $scope.protein = total.protein;
+    $scope.carbs = total.carbs;
+    $scope.fat = total.fat;
+  }
+
 
   // get all food from DB
   function getAllFood($scope, $http) {
@@ -156,3 +166,6 @@ function FoodCtrl($scope, $http, $cookies) {
   };
 }
 
+function calculateTotal(food) {
+  return {calories: 100, protein: 50, carbs: 12, fat: 4};
+}

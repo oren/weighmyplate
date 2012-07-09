@@ -9,7 +9,8 @@
     "mapleTree": "~0.1.8",
     "templar": "~0.0.6",
     "mongodb": "~1.0.2",
-    "request": "~2.9.202"
+    "request": "~2.9.202",
+    "browserify": "~1.13.5"
   },
   "devDependencies": {},
   "optionalDependencies": {},
