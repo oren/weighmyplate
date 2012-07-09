@@ -41,10 +41,13 @@ function FoodCtrl($scope, $http, $cookies) {
   function getUser(email, $scope, $http) {
     $http({method: 'GET', url: '/user'}).
       success(function(data, status, headers, config) {
-
         console.log('data', data);
+
         $scope.items = data.food;
-        $scope.eaten = (data.eatenFood === undefined) ? [] : data.eatenFood;
+        if (data.foodEaten !== undefined && data.foodEaten.length > 0) {
+          $scope.foodEaten = true;
+        }
+        $scope.eaten = (data.foodEaten === undefined) ? [] : data.foodEaten;
       }).
       error(function(data, status, headers, config) {
         // called asynchronously if an error occurs
@@ -61,7 +64,6 @@ function FoodCtrl($scope, $http, $cookies) {
 
         $scope.foodEaten = true;
         $scope.items = data.food;
-        console.log('eatenFood', data.eatenFood);
         $scope.eaten = (data.eatenFood === undefined) ? [] : data.eatenFood;
       }).
       error(function(data, status, headers, config) {
@@ -76,7 +78,6 @@ function FoodCtrl($scope, $http, $cookies) {
   function addEatenFoodToDB($http, foodEaten) {
     $http({method: 'PUT', url: '/user', data: foodEaten}).
       success(function(data, status, headers, config) {
-        console.log('success', status);
       }).
       error(function(data, status, headers, config) {
         // called asynchronously if an error occurs
@@ -150,7 +151,6 @@ function FoodCtrl($scope, $http, $cookies) {
   };
 
   function loggedIn(data) {
-    console.log('the user logged in. data:', data);
     $scope.hideSignup = true;
     getUser(data.email, $scope, $http);
   };

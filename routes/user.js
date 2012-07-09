@@ -49,7 +49,6 @@ function addEatenFood(req, res) {
         res.statusCode = 500;
         res.end();
       } else {
-        console.log('user', user);
         res.end();
       }
     });
