@@ -1,8 +1,9 @@
 'use strict';
 
-/* Controllers */
+angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies) {
+  var total = require('./calc');
+  console.log( total.calculateTotal('test') );
 
-function FoodCtrl($scope, $http, $cookies) {
   initState($scope, $cookies);
 
   // comment when online
@@ -170,5 +171,5 @@ function FoodCtrl($scope, $http, $cookies) {
     $scope.hideSignup = true;
     getUser(data.email, $scope, $http);
   };
-}
+});
 
