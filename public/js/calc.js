@@ -6,7 +6,7 @@
 module.exports.calculateTotal = calculateTotal;
 
 function calculateTotal(eatenFood, availableFood) {
-  result = {calories: 0, protein: 0, carbs: 0, fat: 0};
+  var result = {calories: 0, protein: 0, carbs: 0, fat: 0};
 
   return result;
 };
