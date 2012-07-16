@@ -420,9 +420,8 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
     return false; 
   };
 
+  var calcTotal = require('./calc.js');
   $scope.setTotal = function() {
-    console.log('set');
-    var calcTotal = require('./calc.js');
     var total = calcTotal($scope.eaten, $scope.food);
     console.log('total', total);
 
@@ -436,7 +435,8 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
   function getUser(email, $scope, $http) {
     $http({method: 'GET', url: '/user'}).
       success(function(data, status, headers, config) {
-        $scope.items = data.food;
+        // $scope.items = data.food;
+        $scope.items = {'egg': '80', 'chicken': '120'};
         if (data.foodEaten !== undefined && data.foodEaten.length > 0) {
           $scope.foodEaten = true;
         }
@@ -460,23 +460,6 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
   function calculateTotal(food) {
     return {calories: 100, protein: 50, carbs: 12, fat: 4};
   }
-
-  // get all food from DB
-  function getAllFood($scope, $http) {
-    $http({method: 'GET', url: '/food'}).
-      success(function(data, status, headers, config) {
-
-        $scope.foodEaten = true;
-        $scope.items = data.food;
-        $scope.eaten = (data.eatenFood === undefined) ? [] : data.eatenFood;
-      }).
-      error(function(data, status, headers, config) {
-        // called asynchronously if an error occurs
-        // or server returns response with status
-        // code outside of the <200, 400) range
-        console.log('error', status);
-      });
-  };
 
   // add eaten food to DB
   function addEatenFoodToDB($http, foodEaten, total) {
