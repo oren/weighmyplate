@@ -376,7 +376,7 @@ require.define("/controllers2.js",function(require,module,exports,__dirname,__fi
 
 angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies) {
   var total = require('./calc');
-  console.log( total.calculateTotal('test') );
+  // console.log( total.calculateTotal('test') );
 
   initState($scope, $cookies);
 

@@ -10,12 +10,13 @@ function FoodCtrl($scope, $http, $cookies) {
 
   // add numbers to daily total
   $scope.addItem = function(item) {
-    $scope.calories += item.cal;
-    $scope.protein += item.p;
-    $scope.carbs += item.c;
-    $scope.fat += item.f;
+    $scope.total.calories += item.cal;
+    $scope.total.protein += item.p;
+    $scope.total.carbs += item.c;
+    $scope.total.fat += item.f;
+
     addEatenFood(item.name);
-    addEatenFoodToDB($http, $scope.eaten);
+    addEatenFoodToDB($http, $scope.eaten, $scope.total);
   };
 
   $scope.addFood = function() {
@@ -58,12 +59,12 @@ function FoodCtrl($scope, $http, $cookies) {
   };
 
   function setNewTotal($scope) {
-    var total = calculateTotal($scope.eaten);
+    // var total = calculateTotal($scope.eaten);
 
-    $scope.calories = total.calories;
-    $scope.protein = total.protein;
-    $scope.carbs = total.carbs;
-    $scope.fat = total.fat;
+    // $scope.calories = total.calories;
+    // $scope.protein = total.protein;
+    // $scope.carbs = total.carbs;
+    // $scope.fat = total.fat;
   }
 
   // calculate totals based on array of food
@@ -105,10 +106,7 @@ function FoodCtrl($scope, $http, $cookies) {
 
   function initState($scope, $cookies) {
     $scope.hideSignup = $cookies.loggedin; //undefined if no cookie
-    $scope.calories = 0;
-    $scope.protein = 0;
-    $scope.carbs = 0;
-    $scope.fat = 0;
+    $scope.total = {calories: 0, protein: 0, carbs: 0, fat: 0};
     $scope.foodEaten = false;
     $scope.showAdd = false;
     $scope.addButton = true;
