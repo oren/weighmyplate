@@ -18,7 +18,7 @@
   <ng:include src="'templates/total.ejs'"></ng:include>
 
   <div class='eaten hero-unit' ng-show="foodEaten">
-    <button class='btn btn-info' type='button'>
+    <button class='btn btn-info' type='button' ng-click="setTotal()">
       Update
     </button>
     <table border="0">

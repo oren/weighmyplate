@@ -38,6 +38,10 @@ function FoodCtrl($scope, $http, $cookies) {
     return false; 
   };
 
+  $scope.setTotal = function() {
+    console.log('set');
+  };
+
   // get user from DB
   function getUser(email, $scope, $http) {
     $http({method: 'GET', url: '/user'}).
@@ -60,14 +64,14 @@ function FoodCtrl($scope, $http, $cookies) {
       });
   };
 
-  function setNewTotal($scope) {
+  // function setNewTotal($scope) {
     // var total = calculateTotal($scope.eaten);
 
     // $scope.calories = total.calories;
     // $scope.protein = total.protein;
     // $scope.carbs = total.carbs;
     // $scope.fat = total.fat;
-  }
+  // }
 
   // calculate totals based on array of food
   // [ {name: 'egg', qty: 3}, {name: 'chicken', qty: 2}
