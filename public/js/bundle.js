@@ -364,20 +364,27 @@ process.binding = function (name) {
 })();
 });
 
-require.define("/calc.js",function(require,module,exports,__dirname,__filename,process){module.exports.calculateTotal = calculateTotal;
+require.define("/calc.js",function(require,module,exports,__dirname,__filename,process){// calculate totals of what I ate
+//
+// eatenFood - [{name: 'egg', qty: 10}, {name: 'chicken', qty: 1}]
+// availableFood - [{name: 'egg', cals: 80, protein: 7, carbs: 3, fat: 6}, {name: 'chicken', cals: 120, protein: 7, carbs: 3, fat: 6}]
+// result - {calories: 100, protein: 50, carbs: 12, fat: 4};
+module.exports = calculateTotal;
 
-function calculateTotal(food) {
-    return {calories: 100, protein: 50, carbs: 12, fat: 4};
+function calculateTotal(eatenFood, availableFood) {
+  var result = {calories: 0, protein: 0, carbs: 0, fat: 0};
+
+  return result;
 };
 
 });
 
-require.define("/controllers2.js",function(require,module,exports,__dirname,__filename,process){'use strict';
+require.define("/controllers.js",function(require,module,exports,__dirname,__filename,process){'use strict';
 
+/* Controllers */
+
+// function FoodCtrl($scope, $http, $cookies) {
 angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies) {
-  var total = require('./calc');
-  // console.log( total.calculateTotal('test') );
-
   initState($scope, $cookies);
 
   // comment when online
@@ -385,12 +392,13 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
 
   // add numbers to daily total
   $scope.addItem = function(item) {
-    $scope.calories += item.cal;
-    $scope.protein += item.p;
-    $scope.carbs += item.c;
-    $scope.fat += item.f;
+    $scope.total.calories += item.cal;
+    $scope.total.protein += item.p;
+    $scope.total.carbs += item.c;
+    $scope.total.fat += item.f;
+
     addEatenFood(item.name);
-    addEatenFoodToDB($http, $scope.eaten);
+    addEatenFoodToDB($http, $scope.eaten, $scope.total);
   };
 
   $scope.addFood = function() {
@@ -412,17 +420,31 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
     return false; 
   };
 
+  $scope.setTotal = function() {
+    console.log('set');
+    var calcTotal = require('./calc.js');
+    var total = calcTotal($scope.eaten, $scope.food);
+    console.log('total', total);
+
+    $scope.total.calories = total.calories;
+    $scope.total.protein = total.protein;
+    $scope.total.carbs = total.carbs;
+    $scope.total.fat = total.fat;
+  };
+
   // get user from DB
   function getUser(email, $scope, $http) {
     $http({method: 'GET', url: '/user'}).
       success(function(data, status, headers, config) {
-
         $scope.items = data.food;
         if (data.foodEaten !== undefined && data.foodEaten.length > 0) {
           $scope.foodEaten = true;
         }
+
         $scope.eaten = (data.foodEaten === undefined) ? [] : data.foodEaten;
-        setNewTotal($scope);
+        if(data.total !== undefined) {
+          $scope.total = data.total;
+        };
       }).
       error(function(data, status, headers, config) {
         // called asynchronously if an error occurs
@@ -431,15 +453,6 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
         console.log('error', status);
       });
   };
-
-  function setNewTotal($scope) {
-    var total = calculateTotal($scope.eaten);
-
-    $scope.calories = total.calories;
-    $scope.protein = total.protein;
-    $scope.carbs = total.carbs;
-    $scope.fat = total.fat;
-  }
 
   // calculate totals based on array of food
   // [ {name: 'egg', qty: 3}, {name: 'chicken', qty: 2}
@@ -466,8 +479,8 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
   };
 
   // add eaten food to DB
-  function addEatenFoodToDB($http, foodEaten) {
-    $http({method: 'PUT', url: '/user', data: foodEaten}).
+  function addEatenFoodToDB($http, foodEaten, total) {
+    $http({method: 'PUT', url: '/user', data: {food: foodEaten, total: total}}).
       success(function(data, status, headers, config) {
       }).
       error(function(data, status, headers, config) {
@@ -480,10 +493,7 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
 
   function initState($scope, $cookies) {
     $scope.hideSignup = $cookies.loggedin; //undefined if no cookie
-    $scope.calories = 0;
-    $scope.protein = 0;
-    $scope.carbs = 0;
-    $scope.fat = 0;
+    $scope.total = {calories: 0, protein: 0, carbs: 0, fat: 0};
     $scope.foodEaten = false;
     $scope.showAdd = false;
     $scope.addButton = true;
@@ -546,7 +556,6 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
     getUser(data.email, $scope, $http);
   };
 });
-
 });
-require("/controllers2.js");
+require("/controllers.js");
 })();

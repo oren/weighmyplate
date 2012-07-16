@@ -2,7 +2,8 @@
 
 /* Controllers */
 
-function FoodCtrl($scope, $http, $cookies) {
+// function FoodCtrl($scope, $http, $cookies) {
+angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies) {
   initState($scope, $cookies);
 
   // comment when online
@@ -40,6 +41,14 @@ function FoodCtrl($scope, $http, $cookies) {
 
   $scope.setTotal = function() {
     console.log('set');
+    var calcTotal = require('./calc.js');
+    var total = calcTotal($scope.eaten, $scope.food);
+    console.log('total', total);
+
+    $scope.total.calories = total.calories;
+    $scope.total.protein = total.protein;
+    $scope.total.carbs = total.carbs;
+    $scope.total.fat = total.fat;
   };
 
   // get user from DB
@@ -63,15 +72,6 @@ function FoodCtrl($scope, $http, $cookies) {
         console.log('error', status);
       });
   };
-
-  // function setNewTotal($scope) {
-    // var total = calculateTotal($scope.eaten);
-
-    // $scope.calories = total.calories;
-    // $scope.protein = total.protein;
-    // $scope.carbs = total.carbs;
-    // $scope.fat = total.fat;
-  // }
 
   // calculate totals based on array of food
   // [ {name: 'egg', qty: 3}, {name: 'chicken', qty: 2}
@@ -174,5 +174,4 @@ function FoodCtrl($scope, $http, $cookies) {
     $scope.hideSignup = true;
     getUser(data.email, $scope, $http);
   };
-}
-
+});

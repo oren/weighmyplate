@@ -30,7 +30,6 @@ function getUser(callback) {
 //     fat: 22.75 
 //   }
 // }
-
 function addEatenFood(userID, data, callback) {
   require.main.exports.usersCollection.update({ 'email':'test@gmail.com' }, {'$set': {'foodEaten': data.food, 'total': data.total}}, function(err, user) {
     if (err) { 
