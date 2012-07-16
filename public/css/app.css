@@ -47,9 +47,13 @@ button {
   float: left;
 }
 
-.eaten td:nth-child(2) {
-  margin-left: 15px;
-}
+  .eaten td:nth-child(2) {
+    margin-left: 15px;
+  }
+
+  .eaten input[type='text'] {
+    width: 23px;
+  }
 
 .hero-unit {
   padding: 10px;

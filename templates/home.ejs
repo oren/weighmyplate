@@ -18,14 +18,16 @@
   <ng:include src="'templates/total.ejs'"></ng:include>
 
   <div class='eaten hero-unit' ng-show="foodEaten">
+    <button class='btn btn-info' type='button'>
+      Update
+    </button>
     <table border="0">
       <tr ng-repeat="item in eaten">
-        <td>{{item.qty}}</td>
+        <td> <input type="text" value="{{item.qty}}" maxlength='3' /> </td>
         <td>{{item.name}}</td>
       </tr>
     </table>
   </div>
-
 
   <div class='clearfix'></div>
   <div> 

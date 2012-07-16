@@ -42,13 +42,15 @@ function FoodCtrl($scope, $http, $cookies) {
   function getUser(email, $scope, $http) {
     $http({method: 'GET', url: '/user'}).
       success(function(data, status, headers, config) {
-
         $scope.items = data.food;
         if (data.foodEaten !== undefined && data.foodEaten.length > 0) {
           $scope.foodEaten = true;
         }
+
         $scope.eaten = (data.foodEaten === undefined) ? [] : data.foodEaten;
-        setNewTotal($scope);
+        if(data.total !== undefined) {
+          $scope.total = data.total;
+        };
       }).
       error(function(data, status, headers, config) {
         // called asynchronously if an error occurs
@@ -92,8 +94,8 @@ function FoodCtrl($scope, $http, $cookies) {
   };
 
   // add eaten food to DB
-  function addEatenFoodToDB($http, foodEaten) {
-    $http({method: 'PUT', url: '/user', data: foodEaten}).
+  function addEatenFoodToDB($http, foodEaten, total) {
+    $http({method: 'PUT', url: '/user', data: {food: foodEaten, total: total}}).
       success(function(data, status, headers, config) {
       }).
       error(function(data, status, headers, config) {
