@@ -16,8 +16,16 @@ assert.deepEqual(calcTotal(eatenFood, availableFood), {calories: 0, protein: 0, 
 
 eatenFood = [{name: 'egg', qty: 10}];
 availableFood = [
-  {name: 'egg', cals: 80, protein: 7, carbs: 3, fat: 6},
-  {name: 'chicken', cals: 120, protein: 20, carbs: 3, fat: 5}
+  {name: 'egg', cal: 80, p: 7, c: 3, f: 6},
+  {name: 'chicken', cal: 120, p: 20, c: 3, f: 5}
 ];
 
 assert.deepEqual(calcTotal(eatenFood, availableFood), {calories: 800, protein: 70, carbs: 30, fat: 60});
+
+eatenFood = [{name: 'egg', qty: 10}, {name: 'chicken', qty: 2}];
+availableFood = [
+  {name: 'egg', cal: 80, p: 7, c: 3, f: 6},
+  {name: 'chicken', cal: 120, p: 20, c: 3, f: 5}
+];
+
+assert.deepEqual(calcTotal(eatenFood, availableFood), {calories: 1040, protein: 110, carbs: 36, fat: 70});

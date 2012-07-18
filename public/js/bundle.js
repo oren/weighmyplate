@@ -367,12 +367,25 @@ process.binding = function (name) {
 require.define("/calc.js",function(require,module,exports,__dirname,__filename,process){// calculate totals of what I ate
 //
 // eatenFood - [{name: 'egg', qty: 10}, {name: 'chicken', qty: 1}]
-// availableFood - [{name: 'egg', cals: 80, protein: 7, carbs: 3, fat: 6}, {name: 'chicken', cals: 120, protein: 7, carbs: 3, fat: 6}]
+// availableFood - [{name: 'egg', cal: 80, p: 7, c: 3, f: 6}, {name: 'chicken', cals: 120, p: 7, c: 3, f: 6}]
 // result - {calories: 100, protein: 50, carbs: 12, fat: 4};
 module.exports = calculateTotal;
 
 function calculateTotal(eatenFood, availableFood) {
   var result = {calories: 0, protein: 0, carbs: 0, fat: 0};
+
+  function calcFoodNutrition(food){
+    var filtered = availableFood.filter(function(element){
+      return (element.name === food.name)
+    });
+
+    result.calories += filtered[0].cal * food.qty;
+    result.protein += filtered[0].p* food.qty;
+    result.carbs += filtered[0].c* food.qty;
+    result.fat += filtered[0].f* food.qty;
+  };
+  
+  eatenFood.forEach(calcFoodNutrition);
 
   return result;
 };
@@ -422,7 +435,10 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
 
   var calcTotal = require('./calc.js');
   $scope.setTotal = function() {
-    var total = calcTotal($scope.eaten, $scope.food);
+    console.log('eaten', $scope.eaten);
+    console.log('available', $scope.items);
+
+    var total = calcTotal($scope.eaten, $scope.items);
     console.log('total', total);
 
     $scope.total.calories = total.calories;
@@ -435,8 +451,7 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
   function getUser(email, $scope, $http) {
     $http({method: 'GET', url: '/user'}).
       success(function(data, status, headers, config) {
-        // $scope.items = data.food;
-        $scope.items = {'egg': '80', 'chicken': '120'};
+        $scope.items = data.food;
         if (data.foodEaten !== undefined && data.foodEaten.length > 0) {
           $scope.foodEaten = true;
         }

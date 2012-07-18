@@ -41,7 +41,10 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
 
   var calcTotal = require('./calc.js');
   $scope.setTotal = function() {
-    var total = calcTotal($scope.eaten, $scope.food);
+    console.log('eaten', $scope.eaten);
+    console.log('available', $scope.items);
+
+    var total = calcTotal($scope.eaten, $scope.items);
     console.log('total', total);
 
     $scope.total.calories = total.calories;
@@ -54,8 +57,7 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
   function getUser(email, $scope, $http) {
     $http({method: 'GET', url: '/user'}).
       success(function(data, status, headers, config) {
-        // $scope.items = data.food;
-        $scope.items = {'egg': '80', 'chicken': '120'};
+        $scope.items = data.food;
         if (data.foodEaten !== undefined && data.foodEaten.length > 0) {
           $scope.foodEaten = true;
         }
