@@ -392,12 +392,54 @@ function calculateTotal(eatenFood, availableFood) {
 
 });
 
+require.define("/roundTotal.js",function(require,module,exports,__dirname,__filename,process){// round float numbers into int
+//
+// total  = {calories: 1.32, protein: 2.6, carbs: 0, fat:1.4}
+// result = {calories: 2, protein: 3, carbs: 0, fat:1}
+module.exports = roundTotal;
+
+function roundTotal(total) {
+  var result = {};
+
+  result['calories'] = Math.round(total.calories);
+  result['protein'] = Math.round(total.protein);
+  result['carbs'] = Math.round(total.carbs);
+  result['fat'] = Math.round(total.fat);
+
+  return result;
+};
+
+});
+
+require.define("/roundTotal.js",function(require,module,exports,__dirname,__filename,process){// round float numbers into int
+//
+// total  = {calories: 1.32, protein: 2.6, carbs: 0, fat:1.4}
+// result = {calories: 2, protein: 3, carbs: 0, fat:1}
+module.exports = roundTotal;
+
+function roundTotal(total) {
+  var result = {};
+
+  result['calories'] = Math.round(total.calories);
+  result['protein'] = Math.round(total.protein);
+  result['carbs'] = Math.round(total.carbs);
+  result['fat'] = Math.round(total.fat);
+
+  return result;
+};
+
+});
+require("/roundTotal.js");
+
 require.define("/controllers.js",function(require,module,exports,__dirname,__filename,process){'use strict';
 
 /* Controllers */
 
 // function FoodCtrl($scope, $http, $cookies) {
 angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies) {
+  var calcTotal = require('./calc.js');
+  var roundTotal = require('./roundTotal.js');
+
   initState($scope, $cookies);
 
   // comment when online
@@ -409,6 +451,7 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
     $scope.total.protein += item.p;
     $scope.total.carbs += item.c;
     $scope.total.fat += item.f;
+    $scope.roundedTotal = roundTotal($scope.total);
 
     addEatenFood(item.name);
     addEatenFoodToDB($http, $scope.eaten, $scope.total);
@@ -433,18 +476,23 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
     return false; 
   };
 
-  var calcTotal = require('./calc.js');
-  $scope.setTotal = function() {
-    // update $scope.eaten = [{}, {}];
-    console.log('eaten', $scope.eaten);
-
+  $scope.update = function() {
     var total = calcTotal($scope.eaten, $scope.items);
-
+    
     $scope.total.calories = total.calories;
     $scope.total.protein = total.protein;
     $scope.total.carbs = total.carbs;
     $scope.total.fat = total.fat;
+    $scope.roundedTotal = roundTotal($scope.total);
     
+    addEatenFoodToDB($http, $scope.eaten, $scope.total);
+  };
+
+  $scope.clear = function() {
+    $scope.foodEaten = false;
+    $scope.eaten = [];
+    $scope.total  = {calories: 0, protein: 0, carbs: 0, fat:0};
+    $scope.roundedTotal = roundTotal($scope.total);
     addEatenFoodToDB($http, $scope.eaten, $scope.total);
   };
 
@@ -493,6 +541,7 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
   function initState($scope, $cookies) {
     $scope.hideSignup = $cookies.loggedin; //undefined if no cookie
     $scope.total = {calories: 0, protein: 0, carbs: 0, fat: 0};
+    $scope.roundedTotal = roundTotal($scope.total);
     $scope.foodEaten = false;
     $scope.showAdd = false;
     $scope.addButton = true;

@@ -14,12 +14,15 @@
     <img src="/images/sign_in_blue.png" alt="Sign in">  
   </a>
 
-
   <ng:include src="'templates/total.ejs'"></ng:include>
 
   <div class='eaten hero-unit' ng-show="foodEaten">
-    <button class='btn btn-info' type='button' ng-click="setTotal()">
+    <button class='btn btn-info' type='button' ng-click="update()">
       Update
+    </button>
+
+    <button class='btn' type='button' ng-click="clear()">
+      Clear
     </button>
     <table border="0">
       <tr ng-repeat="item in eaten">
