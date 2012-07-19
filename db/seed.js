@@ -50,27 +50,27 @@ function addUser() {
   { name: 'tuna - oil', cal: 200, p: 20, c:0, f:12 },
   { name: 'sashimi', cal: 115, p: 25, c:0, f:1 },
   { name: '1 scallop', cal: 35, p: 2.9, c:1.68, f:2.9 },
-  { name: 'feta 28g', cal: 70, p: 6, c:2, f:4 },
 
+  { name: 'feta 28g', cal: 70, p: 6, c:2, f:4 },
   { name: 'oats 60g', cal: 225, p: 7.5, c:40.5, f:4.5 },
-  { name: 'milk %1 100g', cal: 48, p: 4, c:5.6, f:1 }
-    // add_food('parmesan cheese 1tbsp', 20, 2, 0, 1.5)
-    // add_food('green beans cup', 44, 2.4, 10, 0.4)
-    // add_food('black beans 100g', 84.6, 4.6, 14.6, 0)
-    // add_food('lentil soup 100g',75 , 4.2, 10.73, 1.85)
-    // add_food('black rice 50g',170 , 4, 31, 3.5)
-    // add_food('rice 50g', 55, 1, 12, 0.3)
-    // add_food('udon noodles 100g', 136, 3.2 ,28 ,1.2)
-    // add_food('nato',120 ,10 ,5 ,6 ) #55 grams
-    // add_food('gobo 100g', 70.66, 1.17, 17.66, 0)
-    // add_food('banana', 105, 1.3, 27, 0.4)
-    // add_food('potatoes 100g', 93, 2, 21.6, 0.1)
-    // add_food('couscous 100g', 380, 12, 80, 1)
-    // add_food('edamame 80g', 120, 10, 8, 5)
-    // add_food('gioza', 22, 2.5, 3, 0.3) #1 wrap + 7 grams of lean beef
-    // add_food('tofu 100g', 53, 5.8, 2.3, 2.3)
-    // add_food('garbanzo beans', 100, 3.8, 14.6, 0.7) #100g
-    // add_food('steel cut oats 30g', 113, 3.8, 20.3, 1.9) #calorieking
+  { name: 'milk %1 100g', cal: 48, p: 4, c:5.6, f:1 },
+  { name: 'parmesan cheese 1tbsp', cal: 20, p: 2, c:0, f:1.5 },
+  { name: 'green beans cup', cal: 44, p: 2.4, c:10, f:0.4 },
+  { name: 'black beans 100g', cal: 84.6, p: 4.6, c:14.6, f:0 },
+  { name: 'lentil soup 100g', cal: 75, p: 4.2, c:10.73, f:1.85 },
+  { name: 'black rice 50g', cal: 170, p: 4, c:31, f:3.5 },
+  { name: 'rice 50g', cal: 55, p: 1, c:12, f:0.3 },
+  { name: 'udon noodles 100g', cal: 136, p: 3.2, c:28, f:1.2 },
+  { name: 'nato', cal: 120, p: 10, c:5, f:6 }, //55g
+  { name: 'gobo 100g', cal: 70.66, p: 1.17, c:17.66, f:0 },
+  { name: 'banana', cal: 105, p: 1.3, c:27, f:0.4 },
+  { name: 'potatoes 100g', cal: 93, p: 2, c:21.6, f:0.1 },
+  { name: 'couscous 100g', cal: 380, p: 12, c:80, f:1 },
+  { name: 'edamame 80g', cal: 120, p: 10, c:8, f:5 },
+  { name: 'gioza', cal: 22, p: 2.5, c:3, f:0.3 },  // wrap + 7 grams of lean beef
+  { name: 'tofu 100g', cal: 53, p: 5.8, c:2.3, f:2.3 },
+  { name: 'garbanzo beans', cal: 100, p: 3.8, c:14.6, f:0.7 }, // 100g
+  { name: 'steel cut oats 30g', cal: 113, p: 3.8, c:20.3, f:1.9 } // calorie king
   ];
 
   users.save(user, function(err, data){
