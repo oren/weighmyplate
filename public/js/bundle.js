@@ -435,16 +435,17 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
 
   var calcTotal = require('./calc.js');
   $scope.setTotal = function() {
+    // update $scope.eaten = [{}, {}];
     console.log('eaten', $scope.eaten);
-    console.log('available', $scope.items);
 
     var total = calcTotal($scope.eaten, $scope.items);
-    console.log('total', total);
 
     $scope.total.calories = total.calories;
     $scope.total.protein = total.protein;
     $scope.total.carbs = total.carbs;
     $scope.total.fat = total.fat;
+    
+    addEatenFoodToDB($http, $scope.eaten, $scope.total);
   };
 
   // get user from DB
