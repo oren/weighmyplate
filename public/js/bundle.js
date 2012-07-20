@@ -411,26 +411,6 @@ function roundTotal(total) {
 
 });
 
-require.define("/roundTotal.js",function(require,module,exports,__dirname,__filename,process){// round float numbers into int
-//
-// total  = {calories: 1.32, protein: 2.6, carbs: 0, fat:1.4}
-// result = {calories: 2, protein: 3, carbs: 0, fat:1}
-module.exports = roundTotal;
-
-function roundTotal(total) {
-  var result = {};
-
-  result['calories'] = Math.round(total.calories);
-  result['protein'] = Math.round(total.protein);
-  result['carbs'] = Math.round(total.carbs);
-  result['fat'] = Math.round(total.fat);
-
-  return result;
-};
-
-});
-require("/roundTotal.js");
-
 require.define("/controllers.js",function(require,module,exports,__dirname,__filename,process){'use strict';
 
 /* Controllers */
@@ -508,6 +488,7 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
         $scope.eaten = (data.foodEaten === undefined) ? [] : data.foodEaten;
         if(data.total !== undefined) {
           $scope.total = data.total;
+          $scope.roundedTotal = roundTotal($scope.total);
         };
       }).
       error(function(data, status, headers, config) {

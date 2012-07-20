@@ -75,6 +75,7 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
         $scope.eaten = (data.foodEaten === undefined) ? [] : data.foodEaten;
         if(data.total !== undefined) {
           $scope.total = data.total;
+          $scope.roundedTotal = roundTotal($scope.total);
         };
       }).
       error(function(data, status, headers, config) {
