@@ -1,10 +1,11 @@
-var host = process.env['MONGO_NODE_DRIVER_HOST'] != null ? process.env['MONGO_NODE_DRIVER_HOST'] : 'localhost';
-var port = process.env['MONGO_NODE_DRIVER_PORT'] != null ? process.env['MONGO_NODE_DRIVER_PORT'] : 27017;
-var dbName = process.env['MONGO_NODE_DRIVER_DB_NAME'] != null ? process.env['MONGO_NODE_DRIVER_DB_NAME'] : 'yunobig-develapment';
+// db stuff
+var mongoHost = process.env['MONGO_HOST'] != null ? process.env['MONG__HOST'] : 'localhost';
+var mongoPort = process.env['MONGO_PORT'] != null ? process.env['MONGO_PORT'] : 27017;
+var mongoDbName = process.env['MONGO_NAME'] != null ? process.env['MONGO__NAME'] : 'yunobig-development';
 
 var mongo = require('mongodb');
-var server = new mongo.Server(host, port, {});
-var db = new mongo.Db(dbName, server);
+var server = new mongo.Server(mongoHost, mongoPort, {});
+var db = new mongo.Db(mongoDbName, server);
 var user = null;
 
 db.open(function(err, db) {

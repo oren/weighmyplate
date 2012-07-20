@@ -5,9 +5,13 @@ var http = require('http');
 var mapleTree = require('mapleTree');
 var ErrorPage = require('error-page');
 var Templar = require('templar');
-var ejs = require('ejs');
+// var ejs = require('ejs');
 
-var config = { port: 3000, engine: ejs, templates: './templates' };
+// configs
+var environment = process.env.NODE_ENV || 'development';
+var config = require('./config/' + environment + '.js');
+
+// var config = { port: 3000, engine: ejs, templates: './templates' };
 var templarOptions = { engine: config.engine, folder: config.templates };
 var router = new mapleTree.RouteTree();
 Templar.loadFolder('./templates')
@@ -15,9 +19,9 @@ Templar.loadFolder('./templates')
 var webSitePort = process.env.PORT || config.port;
 
 // db stuff
-var mongoHost = process.env['MONGO_NODE_DRIVER_HOST'] != null ? process.env['MONGO_NODE_DRIVER_HOST'] : 'localhost';
-var mongoPort = process.env['MONGO_NODE_DRIVER_PORT'] != null ? process.env['MONGO_NODE_DRIVER_PORT'] : 27017;
-var mongoDbName = process.env['MONGO_NODE_DRIVER_DB_NAME'] != null ? process.env['MONGO_NODE_DRIVER_DB_NAME'] : 'yunobig-develapment';
+var mongoHost = process.env['MONGO_HOST'] != null ? process.env['MONG__HOST'] : 'localhost';
+var mongoPort = process.env['MONGO_PORT'] != null ? process.env['MONGO_PORT'] : 27017;
+var mongoDbName = process.env['MONGO_NAME'] != null ? process.env['MONGO__NAME'] : 'yunobig-development';
 
 var mongo = require('mongodb');
 var server = new mongo.Server(mongoHost, mongoPort, {});
