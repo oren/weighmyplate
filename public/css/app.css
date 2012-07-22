@@ -1,74 +1,43 @@
 /* app css stylesheet */
-
-.menu {
-  list-style: none;
-  border-bottom: 0.1em solid black;
-  margin-bottom: 2em;
-  padding: 0 0 0.5em;
+/* button  */
+/*   margin 2px */
+/*  */
+.left {
+  width: 120px;
 }
-
-.menu:before {
-  content: "[";
-}
-
-.menu:after {
-  content: "]";
-}
-
-.menu > li {
-  display: inline;
-}
-
-.menu > li:before {
-  content: "|";
-  padding-right: 0.3em;
-}
-
-.menu > li:nth-child(1):before {
-  content: "";
-  padding: 0;
-}
-
-button {
-  margin: 2px;
-}
-
 .total {
-  float: left;
-  margin-right: 20px;
+  width: 120px;
 }
-
 .total td:nth-child(2) {
   float: right;
   margin-left: 15px;
 }
-
 .eaten {
+  width: 120px;
   float: left;
 }
-
-  .eaten td:nth-child(2) {
-    margin-left: 15px;
-  }
-
-  .eaten input[type='text'] {
-    width: 23px;
-  }
-
+.eaten td:nth-child(2) {
+  margin-left: 15px;
+}
+.eaten input[type='text'] {
+  width: 23px;
+}
 .hero-unit {
   padding: 10px;
 }
-
+.available-food {
+  float: left;
+}
 .carbs {
-  background-color: #5BB75B;
-  background-image: -ms-linear-gradient(top,#62C462,#51A351);
-  background-image: -webkit-gradient(linear,0 0,0 100%,from(#62C462),to(#51A351));
-  background-image: -webkit-linear-gradient(top,#62C462,#51A351);
-  background-image: -o-linear-gradient(top,#62C462,#51A351);
-  background-image: -moz-linear-gradient(top,#62C462,#51A351);
-  background-image: linear-gradient(top,#62C462,#51A351);
+  background-color: #5bb75b;
+  background-image: -ms-linear-gradient(top, #62c462, #51a351);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#62c462), to(#51a351));
+  background-image: -webkit-linear-gradient(top, #62c462, #51a351);
+  background-image: -o-linear-gradient(top, #62c462, #51a351);
+  background-image: -moz-linear-gradient(top, #62c462, #51a351);
+  background-image: linear-gradient(top, #62c462, #51a351);
   background-repeat: repeat-x;
-  border-color: #51A351 #51A351 #387038;
-  filter: progid:dximagetransform.microsoft.gradient(startColorstr='#62c462',endColorstr='#51a351',GradientType=0);
-  filter: progid:dximagetransform.microsoft.gradient(enabled=false);
+  border-color: #51a351 #51a351 #387038;
+/* filter: progid:dximagetransform.microsoft.gradient(startColorstr='#62c462',endColorstr='#51a351',GradientType=0); */
+/* filter: progid:dximagetransform.microsoft.gradient(enabled=false); */
 }
