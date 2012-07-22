@@ -4,14 +4,11 @@ db-seed:
 db-empty:
 	node db/empty.js
 
-# test: test-unit test-acceptance
-# 
-# test-unit:
-# 	@NODE_ENV=test ./node_modules/.bin/mocha \
-# 	  --reporter $(REPORTER)
-# 
-# test-acceptance:
-# 	@NODE_ENV=test ./node_modules/.bin/mocha \
-# 	  --reporter $(REPORTER) \
-# 	  test/acceptance/*.js
+test: 
+	test-unit test-end2end
 
+test-unit:
+	NODE_ENV=test node test/unit/calc.js
+
+test-end2end:
+	NODE_ENV=test node test/end2end/createFood.js

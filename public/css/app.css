@@ -1,7 +1,4 @@
 /* app css stylesheet */
-/* button  */
-/*   margin 2px */
-/*  */
 .left {
   float: left;
   width: 15%;
@@ -26,6 +23,12 @@
 .available-food {
   float: left;
   width: 85%;
+}
+.available-food .add-extra {
+  margin-bottom: 20px;
+}
+.available-food button {
+  margin: 2px;
 }
 .available-food .carbs {
   background-color: #5bb75b;

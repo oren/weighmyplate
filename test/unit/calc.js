@@ -6,7 +6,7 @@
 // assert.deepEqual doesn't care amount the reference in memory
 
 var assert = require('assert');
-var calcTotal = require('../public/js/calc.js');
+var calcTotal = require('../../public/js/calc.js');
 
 var eatenFood = [];
 var availableFood = [];

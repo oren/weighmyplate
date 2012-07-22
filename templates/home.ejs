@@ -10,10 +10,11 @@
 
 <body ng-controller='FoodCtrl'>
 
-  <!-- <a href="#" id="browserid" title="Sign-in with BrowserID" ng-click='signIn()' ng-hide='hideSignup'>   -->
-  <!--   <img src="/images/sign_in_blue.png" alt="Sign in">   -->
-  <!-- </a> -->
-
+  <div>
+    <a href="#" id="browserid" title="Sign-in with BrowserID" ng-click='signIn()' ng-hide='hideSignup'>  
+      <img src="/images/sign_in_blue.png" alt="Sign in">  
+    </a>
+  </div>
 
   <div class='left'>
     <ng:include src="'templates/total.ejs'"></ng:include>
@@ -42,7 +43,11 @@
       {{item.name}}
     </button>
 
-    <button ng-click='addFood()' ng-show='addButton' class='btn' type='button'>+ Add</button>
+    <div class='clearfix'>
+    </div>
+    <br />
+
+    <button ng-click='addFood()' ng-show='addButton' class='btn add-extra' type='button'>+ Add</button>
 
     <form class="well form-inline" ng-show="showAdd">
       <input type="text" class="" placeholder="Name">

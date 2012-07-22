@@ -25,27 +25,32 @@ run
 
     node server.js
 
-develop
--------
-
-I use browserify to enjoy CommonJS awesomeness in the client side js.
-  it's a command line tool that you run against your js files and bundle them into 1 file.
-  in my case it's bundle.js
-  i run it manually whenever i change client side js files:
-      ./node_modules/browserify/bin/cmd.js public/js/controllers.js public/js/calc.js -o public/js/bundle.js
-  there is a watch option but it's not working at the moment.
-
-I use stylus for css. 
-  It watches changes on styl files and compile them to .css
-    ./node_modules/stylus/bin/stylus public/css/app.styl -w
-
-I use supervisor package to restart the node server whenever the code changes.
-it's great for development since i don't need to restart it manualy.
-
 get big
 -------
 
     http://localhost:3000
+
+develop
+-------
+
+I use browserify to enjoy CommonJS awesomeness in the client side js.  
+it's a command line tool that you run against your js files and bundle them into 1 file.  
+in my case it's bundle.js  
+i run it manually whenever i change client side js files:  
+
+    ./node_modules/browserify/bin/cmd.js public/js/controllers.js public/js/calc.js -o public/js/bundle.js  
+
+there is a watch option but it's not working at the moment.  
+
+I use stylus for css.   
+It watches changes on styl files and compile them to .css  
+
+    ./node_modules/stylus/bin/stylus public/css/app.styl -w  
+
+I use supervisor package to restart the node server whenever the code changes.  
+it's great for development since i don't need to restart it manualy.  
+
+    supervisor node server.js
 
 tech stack
 ----------
