@@ -36,4 +36,6 @@ tech stack
 * Node.js - server side
 * MongoDB - DB
 * AngularJS - client side MVC framework
+* Zombie.js - end-2-end testing
+* browserify - CommonJS for client-side js
 

@@ -10,9 +10,9 @@
 
 <body ng-controller='FoodCtrl'>
 
-  <a href="#" id="browserid" title="Sign-in with BrowserID" ng-click='signIn()' ng-hide='hideSignup'>  
-    <img src="/images/sign_in_blue.png" alt="Sign in">  
-  </a>
+  <!-- <a href="#" id="browserid" title="Sign-in with BrowserID" ng-click='signIn()' ng-hide='hideSignup'>   -->
+  <!--   <img src="/images/sign_in_blue.png" alt="Sign in">   -->
+  <!-- </a> -->
 
   <ng:include src="'templates/total.ejs'"></ng:include>
 
@@ -33,7 +33,6 @@
   </div>
 
   <div class='clearfix'></div>
-  <div> 
 
   <div>
     <button ng-repeat="item in items" class='btn btn-success' type='button' ng-click='addItem(item)'>

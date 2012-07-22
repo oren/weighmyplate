@@ -18,5 +18,8 @@
   "optionalDependencies": {},
   "engines": {
     "node": "*"
+  },
+  "scripts": {
+    "pack": "./node_modules/browserify/bin/cmd.js public/js/controllers.js public/js/calc.js -o public/js/bundle.js"
   }
 }
