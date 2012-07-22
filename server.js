@@ -5,13 +5,11 @@ var http = require('http');
 var mapleTree = require('mapleTree');
 var ErrorPage = require('error-page');
 var Templar = require('templar');
-// var ejs = require('ejs');
 
 // configs
 var environment = process.env.NODE_ENV || 'development';
 var config = require('./config/' + environment + '.js');
 
-// var config = { port: 3000, engine: ejs, templates: './templates' };
 var templarOptions = { engine: config.engine, folder: config.templates };
 var router = new mapleTree.RouteTree();
 Templar.loadFolder('./templates')
