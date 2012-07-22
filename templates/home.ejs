@@ -14,12 +14,13 @@
   <!--   <img src="/images/sign_in_blue.png" alt="Sign in">   -->
   <!-- </a> -->
 
+
   <div class='left'>
     <ng:include src="'templates/total.ejs'"></ng:include>
 
     <!-- <div class='clearfix'></div> -->
 
-    <div class='eaten hero-unit' ng-show="foodEaten">
+    <div class='eaten box' ng-show="foodEaten">
       <button class='btn btn-info' type='button' ng-click="update()">
         Update
       </button>
@@ -54,8 +55,6 @@
       <button type="button" class="btn" ng-click="cancelAdd()">Cancel</button>
     </form>
   </div>
-
-
 
   <script src="https://browserid.org/include.js" type="text/javascript"></script>  
   <script src="lib/angular/angular-1.0.1.min.js"></script>
