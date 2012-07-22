@@ -1,0 +1,15 @@
+# run the tests before each commit
+# put this file in .git/hooks
+
+#!/bin/sh
+
+echo "--Attempting to build--"
+if [ -f Makefile ] ; then
+    make test --quiet 
+    if [ $? != 0 ] ; then
+        echo "--Build failure--";
+        exit 1
+    fi
+fi
+echo "--Attempting to build pass--"
+

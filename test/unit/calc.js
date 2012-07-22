@@ -13,7 +13,6 @@ var availableFood = [];
 
 assert.deepEqual(calcTotal(eatenFood, availableFood), {calories: 0, protein: 0, carbs: 0, fat: 0});
 
-
 eatenFood = [{name: 'egg', qty: 10}];
 availableFood = [
   {name: 'egg', cal: 80, p: 7, c: 3, f: 6},
