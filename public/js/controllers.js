@@ -29,6 +29,7 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
     $scope.showAdd = true;
   };
 
+  // add extra food to totals and to db
   $scope.foo = function() {
     console.log('extraCal', $scope.extraCal);
 
@@ -37,19 +38,9 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
     $scope.total.carbs += $scope.extraCarbs ? parseInt($scope.extraCarbs, 10) : 0;
     $scope.total.fat += $scope.extraFat ? parseInt($scope.extraFat, 10) :0;
     $scope.roundedTotal = roundTotal($scope.total);
-  };
-
-  // add extra food to totals and to db
-  $scope.addExtrafood = function() {
-    // $scope.total.calories = @scope.extraCal;
-    console.log('extra', $scope.extraCal);
-
-    // $scope.total.protein = total.protein;
-    // $scope.total.carbs = total.carbs;
-    // $scope.total.fat = total.fat;
-    // $scope.roundedTotal = roundTotal($scope.total);
-    
-    // addEatenFoodToDB($http, $scope.eaten, $scope.total);
+    $scope.extra.push({name: $scope.extraName});
+    $scope.foodEaten = true;
+    // addExtraFoodToDB($http, $scope.extra, $scope.total);
   };
 
   $scope.cancelAdd = function() {
@@ -78,6 +69,7 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
   $scope.clear = function() {
     $scope.foodEaten = false;
     $scope.eaten = [];
+    $scope.extra = [];
     $scope.total  = {calories: 0, protein: 0, carbs: 0, fat:0};
     $scope.roundedTotal = roundTotal($scope.total);
     addEatenFoodToDB($http, $scope.eaten, $scope.total);
@@ -134,6 +126,7 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
     $scope.showAdd = false;
     $scope.addButton = true;
     $scope.eaten = [];
+    $scope.extra = [];
   };
 
   // update food eaten box

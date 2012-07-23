@@ -34,6 +34,9 @@
           <td> <input type="text" value="{{item.qty}}" maxlength='3' ng-model="item.qty" /> </td>
           <td>{{item.name}}</td>
         </tr>
+        <tr ng-repeat="item in extra">
+          <td>{{item.name}}</td>
+        </tr>
       </table>
     </div>
   </div>
@@ -48,7 +51,7 @@
     <button ng-click='addFood()' ng-show='addButton' class='btn add-extra' type='button'>+ Add</button>
 
     <form class="well form-inline" ng-show="showAdd">
-      <input type="text" class="" placeholder="Name">
+      <input type="text" class="" placeholder="Name" ng-model='extraName'>
       <input type="text" class="input-small" placeholder="Calories" ng-model='extraCal'>
       <input type="text" class="input-small" placeholder="Protein" ng-model='extraProtein'>
       <input type="text" class="input-small" placeholder="Carbs" ng-model='extraCarbs'>
