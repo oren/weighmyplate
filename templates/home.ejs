@@ -49,12 +49,12 @@
 
     <form class="well form-inline" ng-show="showAdd">
       <input type="text" class="" placeholder="Name">
-      <input type="text" class="input-small" placeholder="Calories">
-      <input type="text" class="input-small" placeholder="Protein">
-      <input type="text" class="input-small" placeholder="Carbs">
-      <input type="text" class="input-small" placeholder="Fat">
+      <input type="text" class="input-small" placeholder="Calories" ng-model='extraCal'>
+      <input type="text" class="input-small" placeholder="Protein" ng-model='extraProtein'>
+      <input type="text" class="input-small" placeholder="Carbs" ng-model='extraCarbs'>
+      <input type="text" class="input-small" placeholder="Fat" ng-model='extraFat'>
 
-      <button type="button" class="btn" ng-click="addFoodToDB()">Add</button>
+      <button type="button" class="btn" ng-click="foo()">Add</button>
       <button type="button" class="btn" ng-click="cancelAdd()">Cancel</button>
     </form>
   </div>

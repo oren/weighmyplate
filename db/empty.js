@@ -1,7 +1,9 @@
+var environment = process.env.NODE_ENV || 'development';
+
 // db stuff
 var mongoHost = process.env['MONGO_HOST'] != null ? process.env['MONG__HOST'] : 'localhost';
 var mongoPort = process.env['MONGO_PORT'] != null ? process.env['MONGO_PORT'] : 27017;
-var mongoDbName = process.env['MONGO_NAME'] != null ? process.env['MONGO__NAME'] : 'yunobig-development';
+var mongoDbName = process.env['MONGO_NAME'] != null ? process.env['MONGO__NAME'] : 'yunobig-' + environment ;
 
 var mongo = require('mongodb');
 var server = new mongo.Server(mongoHost, mongoPort, {});

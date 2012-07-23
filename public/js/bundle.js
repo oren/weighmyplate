@@ -442,11 +442,31 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
     $scope.showAdd = true;
   };
 
-  $scope.addFoodToDB = function() {
-    console.log('add to db'); 
+  $scope.foo = function() {
+    console.log('extraCal', $scope.extraCal);
+
+    $scope.total.calories += $scope.extraCal ? parseInt($scope.extraCal, 10) : 0;
+    $scope.total.protein += $scope.extraProtein ? parseInt($scope.extraProtein, 10) : 0;
+    $scope.total.carbs += $scope.extraCarbs ? parseInt($scope.extraCarbs, 10) : 0;
+    $scope.total.fat += $scope.extraFat ? parseInt($scope.extraFat, 10) :0;
+    $scope.roundedTotal = roundTotal($scope.total);
+  };
+
+  // add extra food to totals and to db
+  $scope.addExtrafood = function() {
+    // $scope.total.calories = @scope.extraCal;
+    console.log('extra', $scope.extraCal);
+
+    // $scope.total.protein = total.protein;
+    // $scope.total.carbs = total.carbs;
+    // $scope.total.fat = total.fat;
+    // $scope.roundedTotal = roundTotal($scope.total);
+    
+    // addEatenFoodToDB($http, $scope.eaten, $scope.total);
   };
 
   $scope.cancelAdd = function() {
+    console.log('hellllo');
     $scope.addButton = true;
     $scope.showAdd = false;
   };
