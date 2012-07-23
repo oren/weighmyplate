@@ -31,7 +31,15 @@ function getUser(callback) {
 //   }
 // }
 function addEatenFood(userID, data, callback) {
-  require.main.exports.usersCollection.update({ 'email':'test@gmail.com' }, {'$set': {'foodEaten': data.food, 'total': data.total}}, function(err, user) {
+  var food = {'total': data.total}
+
+  if(data.food) {
+    food['foodEaten'] = data.food;
+  } else {
+    food['extraFood'] = data.extraFood;
+  };
+
+  require.main.exports.usersCollection.update({ 'email':'test@gmail.com' }, {'$set': food}, function(err, user) {
     if (err) { 
       console.warn(err.message); 
       callback(err);

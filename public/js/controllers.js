@@ -40,7 +40,7 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
     $scope.roundedTotal = roundTotal($scope.total);
     $scope.extra.push({name: $scope.extraName});
     $scope.foodEaten = true;
-    // addExtraFoodToDB($http, $scope.extra, $scope.total);
+    addExtraFoodToDB($http, $scope.extra, $scope.total);
   };
 
   $scope.cancelAdd = function() {
@@ -108,6 +108,19 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
   // add eaten food to DB
   function addEatenFoodToDB($http, foodEaten, total) {
     $http({method: 'PUT', url: '/user', data: {food: foodEaten, total: total}}).
+      success(function(data, status, headers, config) {
+      }).
+      error(function(data, status, headers, config) {
+        // called asynchronously if an error occurs
+        // or server returns response with status
+        // code outside of the <200, 400) range
+        console.log('error', status);
+      });
+  };
+
+  // add eaten food to DB
+  function addExtraFoodToDB($http, extraFood, total) {
+    $http({method: 'PUT', url: '/user', data: {extraFood: extraFood, total: total}}).
       success(function(data, status, headers, config) {
       }).
       error(function(data, status, headers, config) {
