@@ -443,7 +443,7 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
   };
 
   // add extra food to totals and to db
-  $scope.foo = function() {
+  $scope.addExtra = function() {
     console.log('extraCal', $scope.extraCal);
 
     $scope.total.calories += $scope.extraCal ? parseInt($scope.extraCal, 10) : 0;
