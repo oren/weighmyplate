@@ -35,7 +35,9 @@ function addEatenFood(userID, data, callback) {
 
   if(data.food) {
     food['foodEaten'] = data.food;
-  } else {
+  };
+
+  if(data.extraFood) {
     food['extraFood'] = data.extraFood;
   };
 

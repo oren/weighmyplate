@@ -451,7 +451,13 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
     $scope.total.carbs += $scope.extraCarbs ? parseInt($scope.extraCarbs, 10) : 0;
     $scope.total.fat += $scope.extraFat ? parseInt($scope.extraFat, 10) :0;
     $scope.roundedTotal = roundTotal($scope.total);
-    $scope.extra.push({name: $scope.extraName});
+    $scope.extra.push({ 
+      name: $scope.extraName,
+      cal: $scope.extraCal,
+      p: $scope.extraProtein,
+      c: $scope.extraCarbs,
+      f: $scope.extraFat
+    });
     $scope.foodEaten = true;
     addExtraFoodToDB($http, $scope.extra, $scope.total);
   };
@@ -485,7 +491,7 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
     $scope.extra = [];
     $scope.total  = {calories: 0, protein: 0, carbs: 0, fat:0};
     $scope.roundedTotal = roundTotal($scope.total);
-    addEatenFoodToDB($http, $scope.eaten, $scope.total);
+    addEatenFoodToDB($http, $scope.eaten, $scope.total, $scope.extra);
   };
 
   // get user from DB
@@ -501,6 +507,10 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
         if(data.total !== undefined) {
           $scope.total = data.total;
           $scope.roundedTotal = roundTotal($scope.total);
+        };
+        if(data.total !== undefined) {
+          $scope.extra = data.extraFood;
+          $scope.foodEaten = true;
         };
       }).
       error(function(data, status, headers, config) {
@@ -519,8 +529,8 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
   }
 
   // add eaten food to DB
-  function addEatenFoodToDB($http, foodEaten, total) {
-    $http({method: 'PUT', url: '/user', data: {food: foodEaten, total: total}}).
+  function addEatenFoodToDB($http, foodEaten, total, extra) {
+    $http({method: 'PUT', url: '/user', data: {food: foodEaten, total: total, extraFood: extra}}).
       success(function(data, status, headers, config) {
       }).
       error(function(data, status, headers, config) {
