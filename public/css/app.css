@@ -1,7 +1,8 @@
 /* app css stylesheet */
 .left {
   float: left;
-  width: 15%;
+  width: 150px;
+  height: 300px;
 }
 .left .total {
   width: 120px;
@@ -19,10 +20,6 @@
 }
 .left .eaten input[type='text'] {
   width: 23px;
-}
-.available-food {
-  float: left;
-  width: 85%;
 }
 .available-food .add-extra {
   margin-top: 20px;

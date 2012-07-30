@@ -18,6 +18,7 @@ install
 setup
 -----
 
+    mongod &
     make db-seed  # load food to DB
 
 run
@@ -51,6 +52,10 @@ I use supervisor package to restart the node server whenever the code changes.
 it's great for development since i don't need to restart it manualy.  
 
     supervisor node server.js
+
+here is i nice 1 liner to start development:
+
+    mongod & ./node_modules/stylus/bin/stylus public/css/app.styl -w & supervisor node server.js &
 
 tech stack
 ----------
