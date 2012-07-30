@@ -43,8 +43,24 @@ function addEatenFood(req, res) {
 
   req.on('end', function () {
     var userID = 1;
+    var data = JSON.parse(payload);
+    console.log('data', data);
 
-    users.addEatenFood(userID, JSON.parse(payload), function(err, user){ 
+    // add to available food
+    if(data.newFood) {
+      console.log('addin new food');
+      users.addAvailableFood(userID, data.newFood, function(err, user) { 
+        if(err) {
+          res.statusCode = 500;
+          res.end();
+        } else {
+          res.end();
+        }
+      });
+    }
+
+    console.log('addin eaten food');
+    users.addEatenFood(userID, data, function(err, user) { 
       if(err) {
         res.statusCode = 500;
         res.end();
@@ -54,5 +70,4 @@ function addEatenFood(req, res) {
     });
     res.end();
   });
-
 };

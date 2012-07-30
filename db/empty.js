@@ -21,7 +21,6 @@ db.open(function(err, db) {
   }
 });
 
-
 function foo() { 
   user.remove(function(err, count) {
     if(err) {

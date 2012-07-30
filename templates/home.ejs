@@ -51,14 +51,15 @@
     <button ng-click='addFood()' ng-show='addButton' class='btn add-extra' type='button'>+ Add</button>
 
     <form class="well form-inline" ng-show="showAdd">
-      <input type="text" class="" placeholder="Name" ng-model='extraName'>
-      <input type="text" class="input-small" placeholder="Calories" ng-model='extraCal'>
-      <input type="text" class="input-small" placeholder="Protein" ng-model='extraProtein'>
-      <input type="text" class="input-small" placeholder="Carbs" ng-model='extraCarbs'>
-      <input type="text" class="input-small" placeholder="Fat" ng-model='extraFat'>
+      <input type="text" class="" placeholder="Name" ng-model='extraFood.name'>
+      <input type="text" class="input-small" placeholder="Calories" ng-model='extraFood.cal'>
+      <input type="text" class="input-small" placeholder="Protein" ng-model='extraFood.p'>
+      <input type="text" class="input-small" placeholder="Carbs" ng-model='extraFood.c'>
+      <input type="text" class="input-small" placeholder="Fat" ng-model='extraFood.f'>
 
       <button type="button" class="btn" ng-click="addExtra()">Add</button>
       <button type="button" class="btn" ng-click="cancelAdd()">Cancel</button>
+      <input type="checkbox" ng-model='temporaryFood'/> Temporary food
     </form>
   </div>
 

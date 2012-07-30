@@ -31,22 +31,18 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
 
   // add extra food to totals and to db
   $scope.addExtra = function() {
-    console.log('extraCal', $scope.extraCal);
 
-    $scope.total.calories += $scope.extraCal ? parseInt($scope.extraCal, 10) : 0;
-    $scope.total.protein += $scope.extraProtein ? parseInt($scope.extraProtein, 10) : 0;
-    $scope.total.carbs += $scope.extraCarbs ? parseInt($scope.extraCarbs, 10) : 0;
-    $scope.total.fat += $scope.extraFat ? parseInt($scope.extraFat, 10) :0;
+    $scope.total.calories += $scope.extraCal ? parseInt($scope.extraFood.extraCal, 10) : 0;
+    $scope.total.protein += $scope.extraProtein ? parseInt($scope.extraFood.extraProtein, 10) : 0;
+    $scope.total.carbs += $scope.extraCarbs ? parseInt($scope.extraFood.extraCarbs, 10) : 0;
+    $scope.total.fat += $scope.extraFat ? parseInt($scope.extraFood.extraFat, 10) :0;
     $scope.roundedTotal = roundTotal($scope.total);
-    $scope.extra.push({ 
-      name: $scope.extraName,
-      cal: $scope.extraCal,
-      p: $scope.extraProtein,
-      c: $scope.extraCarbs,
-      f: $scope.extraFat
-    });
+
+    $scope.extra.push($scope.extraFood);
+
     $scope.foodEaten = true;
-    addExtraFoodToDB($http, $scope.extra, $scope.total);
+    
+    addExtraFoodToDB($http, $scope.extra, $scope.extraFood, $scope.total);
   };
 
   $scope.cancelAdd = function() {
@@ -129,9 +125,11 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
   };
 
   // add eaten food to DB
-  function addExtraFoodToDB($http, extraFood, total) {
-    $http({method: 'PUT', url: '/user', data: {extraFood: extraFood, total: total}}).
+  // newFood is {} or {'name':'egg', 'cal':'90', 'p':'1', 'c';'2', 'f':'3'}
+  function addExtraFoodToDB($http, extraFood, newFood, total) {
+    $http({method: 'PUT', url: '/user', data: {extraFood: extraFood, newFood: newFood, total: total}}).
       success(function(data, status, headers, config) {
+        $scope.extraFood = null;
       }).
       error(function(data, status, headers, config) {
         // called asynchronously if an error occurs
@@ -148,8 +146,10 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
     $scope.foodEaten = false;
     $scope.showAdd = false;
     $scope.addButton = true;
+    $scope.temporaryFood = false;
     $scope.eaten = [];
     $scope.extra = [];
+    $scope.extraFood = null;
   };
 
   // update food eaten box
