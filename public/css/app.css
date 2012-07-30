@@ -2,7 +2,6 @@
 .left {
   float: left;
   width: 150px;
-  height: 300px;
 }
 .left .total {
   width: 120px;
@@ -20,6 +19,9 @@
 }
 .left .eaten input[type='text'] {
   width: 23px;
+}
+.available-food {
+  overflow: hidden;
 }
 .available-food .add-extra {
   margin-top: 20px;
