@@ -435,6 +435,7 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
 
     addEatenFood(item.name);
     addEatenFoodToDB($http, $scope.eaten, $scope.total);
+    updateTitle($scope.roundedTotal.calories);
   };
 
   $scope.addFood = function() {
@@ -456,6 +457,7 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
     $scope.foodEaten = true;
     
     addExtraFoodToDB($http, $scope.extra, $scope.extraFood, $scope.total);
+    updateTitle($scope.roundedTotal.calories);
   };
 
   $scope.cancelAdd = function() {
@@ -477,6 +479,7 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
     $scope.total.carbs = total.carbs;
     $scope.total.fat = total.fat;
     $scope.roundedTotal = roundTotal($scope.total);
+    updateTitle($scope.roundedTotal.calories);
     
     addEatenFoodToDB($http, $scope.eaten, $scope.total);
   };
@@ -488,6 +491,7 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
     $scope.total  = {calories: 0, protein: 0, carbs: 0, fat:0};
     $scope.roundedTotal = roundTotal($scope.total);
     addEatenFoodToDB($http, $scope.eaten, $scope.total, $scope.extra);
+    updateTitle($scope.roundedTotal.calories);
   };
 
   // get user from DB
@@ -507,6 +511,7 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
         if(data.total !== undefined) {
           $scope.extra = data.extraFood;
           $scope.foodEaten = true;
+          updateTitle($scope.roundedTotal.calories);
         };
       }).
       error(function(data, status, headers, config) {
@@ -543,6 +548,7 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
     $http({method: 'PUT', url: '/user', data: {extraFood: extraFood, newFood: newFood, total: total}}).
       success(function(data, status, headers, config) {
         $scope.extraFood = null;
+        updateTitle($scope.roundedTotal.calories);
       }).
       error(function(data, status, headers, config) {
         // called asynchronously if an error occurs
@@ -619,6 +625,10 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
   function loggedIn(data) {
     $scope.hideSignup = true;
     getUser(data.email, $scope, $http);
+  };
+
+  function updateTitle(calories) {
+    document.title = 'Y U NO BIG ?' + ' ' + calories;
   };
 });
 });
