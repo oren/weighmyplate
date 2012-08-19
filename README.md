@@ -39,7 +39,7 @@ it's a command line tool that you run against your js files and bundle them into
 in my case it's bundle.js  
 i run it manually whenever i change client side js files:  
 
-    ./node_modules/browserify/bin/cmd.js public/js/controllers.js public/js/calc.js -o public/js/bundle.js  
+    ./node_modules/browserify/bin/cmd.js public/js/controllers.js -o public/js/bundle.js -w
 
 there is a watch option but it's not working at the moment.  
 
@@ -53,9 +53,9 @@ it's great for development since i don't need to restart it manualy.
 
     supervisor node server.js
 
-here is i nice 1 liner to start development:
+here is a nice 1 liner to start development: run mongo, stylus, browserify and node server, all in the backgraund
 
-    mongod & ./node_modules/stylus/bin/stylus public/css/app.styl -w & supervisor node server.js &
+    mongod & ./node_modules/stylus/bin/stylus public/css/app.styl -w & ./node_modules/browserify/bin/cmd.js public/js/controllers.js -o public/js/bundle.js -w & supervisor node server.js 
 
 tech stack
 ----------
