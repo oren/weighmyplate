@@ -446,10 +446,10 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
   // add extra food to totals and to db
   $scope.addExtra = function() {
 
-    $scope.total.calories += $scope.extraCal ? parseInt($scope.extraFood.extraCal, 10) : 0;
-    $scope.total.protein += $scope.extraProtein ? parseInt($scope.extraFood.extraProtein, 10) : 0;
-    $scope.total.carbs += $scope.extraCarbs ? parseInt($scope.extraFood.extraCarbs, 10) : 0;
-    $scope.total.fat += $scope.extraFat ? parseInt($scope.extraFood.extraFat, 10) :0;
+    $scope.total.calories += $scope.extraFood.cal ? parseInt($scope.extraFood.cal, 10) : 0;
+    $scope.total.protein += $scope.extraFood.p ? parseInt($scope.extraFood.p, 10) : 0;
+    $scope.total.carbs += $scope.extraFood.c ? parseInt($scope.extraFood.c, 10) : 0;
+    $scope.total.fat += $scope.extraFood.f ? parseInt($scope.extraFood.f, 10) : 0;
     $scope.roundedTotal = roundTotal($scope.total);
 
     $scope.extra.push($scope.extraFood);
