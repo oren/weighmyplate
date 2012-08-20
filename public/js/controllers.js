@@ -5,6 +5,7 @@
 // function FoodCtrl($scope, $http, $cookies) {
 angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies) {
   var calcTotal = require('./calc.js');
+  var calcExtraTotal = require('./calcExtra.js');
   var roundTotal = require('./roundTotal.js');
 
   initState($scope, $cookies);
@@ -72,16 +73,30 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
   };
 
   $scope.update = function() {
+
+    var extraTotal = {
+      cal: 0,
+      p: 0,
+      c: 0,
+      f: 0
+    };
+
+    if ($scope.extra.length !== 0) {
+      extraTotal = calcExtraTotal($scope.extra);
+    }
+
     var total = calcTotal($scope.eaten, $scope.items);
-    
-    $scope.total.calories = total.calories;
-    $scope.total.protein = total.protein;
-    $scope.total.carbs = total.carbs;
-    $scope.total.fat = total.fat;
+
+    $scope.total.calories = total.calories + extraTotal.cal;
+    $scope.total.protein = total.protein + extraTotal.p;
+    $scope.total.carbs = total.carbs + extraTotal.c;
+    $scope.total.fat = total.fat + extraTotal.f;;
     $scope.roundedTotal = roundTotal($scope.total);
     updateTitle($scope.roundedTotal.calories);
     
-    addEatenFoodToDB($http, $scope.eaten, $scope.total);
+    // addEatenFoodToDB($http, $scope.eaten, $scope.total);
+    console.log('extra', $scope.extra);
+    addEatenFoodToDB($http, $scope.eaten, $scope.total, $scope.extra);
   };
 
   $scope.clear = function() {
@@ -133,6 +148,7 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
   function addEatenFoodToDB($http, foodEaten, total, extra) {
     $http({method: 'PUT', url: '/user', data: {food: foodEaten, total: total, extraFood: extra}}).
       success(function(data, status, headers, config) {
+        console.log('add eaten food', data);
       }).
       error(function(data, status, headers, config) {
         // called asynchronously if an error occurs

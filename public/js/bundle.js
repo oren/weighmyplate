@@ -411,6 +411,82 @@ function roundTotal(total) {
 
 });
 
+require.define("/calcExtra.js",function(require,module,exports,__dirname,__filename,process){// calculate totals of extra food
+//
+// availableFood - [{name: 'egg', cal: 80, p: 7, c: 3, f: 6}, {name: 'chicken', cals: 120, p: 7, c: 3, f: 6}]
+// result - {"cal":200,"p":27,"c":0,"f":11}
+module.exports = calculateExtraTotal;
+
+function calculateExtraTotal(extraFood) {
+  var result = {cal: 0, p: 0, c: 0, f: 0};
+
+  function addValues(element, index, array) {
+    result.cal += element.cal;
+    result.p += element.p;
+    result.c += element.c;
+    result.f += element.f;
+  };
+
+  extraFood.forEach(addValues);
+
+  return result;
+};
+
+});
+
+require.define("/calc.js",function(require,module,exports,__dirname,__filename,process){// calculate totals of what I ate
+//
+// eatenFood - [{name: 'egg', qty: 10}, {name: 'chicken', qty: 1}]
+// availableFood - [{name: 'egg', cal: 80, p: 7, c: 3, f: 6}, {name: 'chicken', cals: 120, p: 7, c: 3, f: 6}]
+// result - {calories: 100, protein: 50, carbs: 12, fat: 4};
+module.exports = calculateTotal;
+
+function calculateTotal(eatenFood, availableFood) {
+  var result = {calories: 0, protein: 0, carbs: 0, fat: 0};
+
+  function calcFoodNutrition(food){
+    var filtered = availableFood.filter(function(element){
+      return (element.name === food.name)
+    });
+
+    result.calories += filtered[0].cal * food.qty;
+    result.protein += filtered[0].p* food.qty;
+    result.carbs += filtered[0].c* food.qty;
+    result.fat += filtered[0].f* food.qty;
+  };
+  
+  eatenFood.forEach(calcFoodNutrition);
+
+  return result;
+};
+
+});
+require("/calc.js");
+
+require.define("/calcExtra.js",function(require,module,exports,__dirname,__filename,process){// calculate totals of extra food
+//
+// availableFood - [{name: 'egg', cal: 80, p: 7, c: 3, f: 6}, {name: 'chicken', cals: 120, p: 7, c: 3, f: 6}]
+// result - {"cal":200,"p":27,"c":0,"f":11}
+module.exports = calculateExtraTotal;
+
+function calculateExtraTotal(extraFood) {
+  var result = {cal: 0, p: 0, c: 0, f: 0};
+
+  function addValues(element, index, array) {
+    result.cal += element.cal;
+    result.p += element.p;
+    result.c += element.c;
+    result.f += element.f;
+  };
+
+  extraFood.forEach(addValues);
+
+  return result;
+};
+
+});
+require("/calcExtra.js");
+
 require.define("/controllers.js",function(require,module,exports,__dirname,__filename,process){'use strict';
 
 /* Controllers */
@@ -418,6 +494,7 @@ require.define("/controllers.js",function(require,module,exports,__dirname,__fil
 // function FoodCtrl($scope, $http, $cookies) {
 angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies) {
   var calcTotal = require('./calc.js');
+  var calcExtraTotal = require('./calcExtra.js');
   var roundTotal = require('./roundTotal.js');
 
   initState($scope, $cookies);
@@ -485,16 +562,30 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
   };
 
   $scope.update = function() {
+
+    var extraTotal = {
+      cal: 0,
+      p: 0,
+      c: 0,
+      f: 0
+    };
+
+    if ($scope.extra.length !== 0) {
+      extraTotal = calcExtraTotal($scope.extra);
+    }
+
     var total = calcTotal($scope.eaten, $scope.items);
-    
-    $scope.total.calories = total.calories;
-    $scope.total.protein = total.protein;
-    $scope.total.carbs = total.carbs;
-    $scope.total.fat = total.fat;
+
+    $scope.total.calories = total.calories + extraTotal.cal;
+    $scope.total.protein = total.protein + extraTotal.p;
+    $scope.total.carbs = total.carbs + extraTotal.c;
+    $scope.total.fat = total.fat + extraTotal.f;;
     $scope.roundedTotal = roundTotal($scope.total);
     updateTitle($scope.roundedTotal.calories);
     
-    addEatenFoodToDB($http, $scope.eaten, $scope.total);
+    // addEatenFoodToDB($http, $scope.eaten, $scope.total);
+    console.log('extra', $scope.extra);
+    addEatenFoodToDB($http, $scope.eaten, $scope.total, $scope.extra);
   };
 
   $scope.clear = function() {
@@ -546,6 +637,7 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
   function addEatenFoodToDB($http, foodEaten, total, extra) {
     $http({method: 'PUT', url: '/user', data: {food: foodEaten, total: total, extraFood: extra}}).
       success(function(data, status, headers, config) {
+        console.log('add eaten food', data);
       }).
       error(function(data, status, headers, config) {
         // called asynchronously if an error occurs

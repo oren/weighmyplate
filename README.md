@@ -55,7 +55,8 @@ it's great for development since i don't need to restart it manualy.
 
 here is a nice 1 liner to start development: run mongo, stylus, browserify and node server, all in the backgraund
 
-    mongod & ./node_modules/stylus/bin/stylus public/css/app.styl -w & ./node_modules/browserify/bin/cmd.js public/js/controllers.js -o public/js/bundle.js -w & supervisor node server.js 
+    mongod & ./node_modules/stylus/bin/stylus public/css/app.styl -w & ./node_modules/browserify/bin/cmd.js public/js/controllers.js public/js/calc.js public/js/calcExtra.js -o public/js/bundle.js -w & supervisor node server.js 
+    
 
 tech stack
 ----------
