@@ -446,20 +446,30 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
   // add extra food to totals and to db
   $scope.addExtra = function() {
 
-    $scope.total.calories += $scope.extraFood.cal ? parseInt($scope.extraFood.cal, 10) : 0;
-    $scope.total.protein += $scope.extraFood.p ? parseInt($scope.extraFood.p, 10) : 0;
-    $scope.total.carbs += $scope.extraFood.c ? parseInt($scope.extraFood.c, 10) : 0;
-    $scope.total.fat += $scope.extraFood.f ? parseInt($scope.extraFood.f, 10) : 0;
+    var newFood = {
+      name: $scope.extraFood.name,
+      cal: $scope.extraFood.cal ? parseInt($scope.extraFood.cal, 10) : 0,
+      p: $scope.extraFood.p ? parseInt($scope.extraFood.p, 10) : 0,
+      c: $scope.extraFood.c ? parseInt($scope.extraFood.c, 10) : 0,
+      f: $scope.extraFood.f ? parseInt($scope.extraFood.f, 10) : 0
+    };
+
+    $scope.total.calories += newFood.cal;
+    $scope.total.protein += newFood.p; 
+    $scope.total.carbs += newFood.c;
+    $scope.total.fat += newFood.f;
     $scope.roundedTotal = roundTotal($scope.total);
 
-    $scope.extra.push($scope.extraFood);
+    $scope.extra.push(newFood);
 
     $scope.foodEaten = true;
+
+    // don't add the food to available food since it's temporary
     if($scope.temporaryFood) {
-      $scope.extraFood = null;
+      newFood = null;
     };
     
-    addExtraFoodToDB($http, $scope.extra, $scope.extraFood, $scope.total);
+    addExtraFoodToDB($http, $scope.extra, newFood, $scope.total);
     updateTitle($scope.roundedTotal.calories);
   };
 
