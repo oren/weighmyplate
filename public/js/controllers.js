@@ -42,6 +42,9 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
     $scope.extra.push($scope.extraFood);
 
     $scope.foodEaten = true;
+    if($scope.temporaryFood) {
+      $scope.extraFood = null;
+    };
     
     addExtraFoodToDB($http, $scope.extra, $scope.extraFood, $scope.total);
     updateTitle($scope.roundedTotal.calories);
