@@ -13,6 +13,9 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
   // comment when online
   getUser('test@gmail.com', $scope, $http);
 
+
+  //event handlers
+
   // add numbers to daily total
   $scope.addItem = function(item) {
     $scope.total.calories += item.cal;
@@ -33,7 +36,6 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
 
   // add extra food to totals and to db
   $scope.addExtra = function() {
-
     var newFood = {
       name: $scope.extraFood.name,
       cal: $scope.extraFood.cal ? parseInt($scope.extraFood.cal, 10) : 0,
@@ -75,7 +77,6 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
   };
 
   $scope.update = function() {
-
     var extraTotal = {
       cal: 0,
       p: 0,
@@ -108,6 +109,12 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
     addEatenFoodToDB($http, $scope.eaten, $scope.total, $scope.extra);
     updateTitle($scope.roundedTotal.calories);
   };
+
+  $scope.qtyChanged = function() {
+    $scope.update();
+  };
+  
+  //helpers
 
   // get user from DB
   function getUser(email, $scope, $http) {

@@ -22,18 +22,16 @@
     <!-- <div class='clearfix'></div> -->
 
     <div class='eaten box' ng-show="foodEaten">
-      <button class='btn btn-info' type='button' ng-click="update()">
-        Update
-      </button>
-
       <button class='btn' type='button' ng-click="clear()">
         Clear
       </button>
+
       <table border="0">
         <tr ng-repeat="item in eaten">
-          <td> <input type="text" maxlength='3' ng-model="item.qty" /> </td>
+          <td> <input type="text" maxlength='3' ng-model="item.qty" ng-change="qtyChanged()"/> </td>
           <td>{{item.name}}</td>
         </tr>
+
         <tr ng-repeat="item in extra">
           <td>{{item.name}}</td>
         </tr>
@@ -42,7 +40,7 @@
   </div>
 
   <div class='available-food'>
-    <button ng-repeat="item in items" class='btn btn-success' type='button' ng-click='addItem(item)'>
+    <button ng-repeat="item in items" class='btn' type='button' ng-click='addItem(item)'>
       {{item.name}}
     </button>
 
