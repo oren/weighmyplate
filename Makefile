@@ -20,3 +20,6 @@ ugly:
 
 bundle:
 	./node_modules/browserify/bin/cmd.js public/js/controllers.js public/js/calc.js | ./node_modules/uglify-js/bin/uglifyjs -o public/js/miniBundle.js
+
+dev:
+	mongod & ./node_modules/stylus/bin/stylus public/css/app.styl -w & ./node_modules/browserify/bin/cmd.js public/js/controllers.js public/js/calc.js public/js/calcExtra.js -o public/js/bundle.js -w & node server.js

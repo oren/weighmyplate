@@ -48,21 +48,23 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
     $scope.total.fat += newFood.f;
     $scope.roundedTotal = roundTotal($scope.total);
 
-    $scope.extra.push(newFood);
-
     $scope.foodEaten = true;
 
     // don't add the food to available food since it's temporary
     if($scope.temporaryFood) {
       newFood = null;
+      $scope.extra.push(newFood);
+      addExtraFoodToDB($http, $scope.extra, newFood, $scope.total);
+    } else {
+      // $scope.items.push(newFood);
+      // $scope.addItem(
+      // $scope.eaten.push({name: newFood.name, qty: 1});
     };
     
-    addExtraFoodToDB($http, $scope.extra, newFood, $scope.total);
     updateTitle($scope.roundedTotal.calories);
   };
 
   $scope.cancelAdd = function() {
-    console.log('hellllo');
     $scope.addButton = true;
     $scope.showAdd = false;
   };
@@ -94,8 +96,6 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
     $scope.roundedTotal = roundTotal($scope.total);
     updateTitle($scope.roundedTotal.calories);
     
-    // addEatenFoodToDB($http, $scope.eaten, $scope.total);
-    console.log('extra', $scope.extra);
     addEatenFoodToDB($http, $scope.eaten, $scope.total, $scope.extra);
   };
 

@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <title>Y U NO BIG?</title>
-  <link rel="stylesheet" href="lib/bootstrap/bootstrap.min.css"/>
+  <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css"/>
   <link rel="stylesheet" href="css/app.css"/>
 </head>
 
@@ -31,7 +31,7 @@
       </button>
       <table border="0">
         <tr ng-repeat="item in eaten">
-          <td> <input type="text" value="" maxlength='3' ng-model="item.qty" /> </td>
+          <td> <input type="text" maxlength='3' ng-model="item.qty" /> </td>
           <td>{{item.name}}</td>
         </tr>
         <tr ng-repeat="item in extra">
