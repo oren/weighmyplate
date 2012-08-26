@@ -33,6 +33,10 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
     $scope.showAdd = true;
   };
 
+  $scope.editFood = function() {
+    console.log('hi');
+  };
+
   // add extra food to totals and to db
   $scope.addExtra = function() {
 

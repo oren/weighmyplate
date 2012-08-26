@@ -14,6 +14,7 @@ install
 
     install node.js from http://nodejs.org/
     npm install # install dependencies
+    npm install supervisor -g
 
 setup
 -----
