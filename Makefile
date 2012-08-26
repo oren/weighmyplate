@@ -16,10 +16,10 @@ b:
 	./node_modules/browserify/bin/cmd.js public/js/controllers.js public/js/calc.js public/js/calcExtra.js -o public/js/bundle.js  
 
 ugly:
-	./node_modules/uglify-js/bin/uglifyjs public/js/bundle.js -o public/js/miniBundle.js 
+	./node_modules/uglify-js/bin/uglifyjs -o public/js/miniBundle.js public/js/bundle.js
 
 bundle:
-	./node_modules/browserify/bin/cmd.js public/js/controllers.js public/js/calc.js | ./node_modules/uglify-js/bin/uglifyjs -o public/js/miniBundle.js
+	./node_modules/browserify/bin/cmd.js public/js/controllers.js public/js/calc.js public/js/calcExtra.js | ./node_modules/uglify-js/bin/uglifyjs -o public/js/miniBundle.js
 
 stylus:
 	./node_modules/stylus/bin/stylus public/css/app.styl -w
