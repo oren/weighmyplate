@@ -12,7 +12,7 @@ test-unit:
 test-end2end:
 	NODE_ENV=test node test/end2end/createFood.js
 
-browserify:
+b:
 	./node_modules/browserify/bin/cmd.js public/js/controllers.js public/js/calc.js public/js/calcExtra.js -o public/js/bundle.js  
 
 ugly:

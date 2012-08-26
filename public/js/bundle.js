@@ -7,12 +7,12 @@
     var cached = require.cache[resolved];
     var res = cached? cached.exports : mod();
     return res;
-}
+};
 
 require.paths = [];
 require.modules = {};
 require.cache = {};
-require.extensions = [".js",".coffee"];
+require.extensions = [".js",".coffee",".json"];
 
 require._core = {
     'assert': true,
@@ -151,7 +151,14 @@ require.alias = function (from, to) {
         ;
         
         var require_ = function (file) {
-            return require(file, dirname);
+            var requiredModule = require(file, dirname);
+            var cached = require.cache[require.resolve(file, dirname)];
+
+            if (cached && cached.parent === null) {
+                cached.parent = module_;
+            }
+
+            return requiredModule;
         };
         require_.resolve = function (name) {
             return require.resolve(name, dirname);
@@ -159,7 +166,13 @@ require.alias = function (from, to) {
         require_.modules = require.modules;
         require_.define = require.define;
         require_.cache = require.cache;
-        var module_ = { exports : {} };
+        var module_ = {
+            id : filename,
+            filename: filename,
+            exports : {},
+            loaded : false,
+            parent: null
+        };
         
         require.modules[filename] = function () {
             require.cache[filename] = module_;
@@ -172,6 +185,7 @@ require.alias = function (from, to) {
                 filename,
                 process
             );
+            module_.loaded = true;
             return module_.exports;
         };
     };
@@ -312,17 +326,24 @@ exports.basename = function(path, ext) {
 exports.extname = function(path) {
   return splitPathRe.exec(path)[3] || '';
 };
+
 });
 
 require.define("__browserify_process",function(require,module,exports,__dirname,__filename,process){var process = module.exports = {};
 
 process.nextTick = (function () {
-    var queue = [];
+    var canSetImmediate = typeof window !== 'undefined'
+        && window.setImmediate;
     var canPost = typeof window !== 'undefined'
         && window.postMessage && window.addEventListener
     ;
-    
+
+    if (canSetImmediate) {
+        return window.setImmediate;
+    }
+
     if (canPost) {
+        var queue = [];
         window.addEventListener('message', function (ev) {
             if (ev.source === window && ev.data === 'browserify-tick') {
                 ev.stopPropagation();
@@ -332,14 +353,15 @@ process.nextTick = (function () {
                 }
             }
         }, true);
-    }
-    
-    return function (fn) {
-        if (canPost) {
+
+        return function nextTick(fn) {
             queue.push(fn);
             window.postMessage('browserify-tick', '*');
-        }
-        else setTimeout(fn, 0);
+        };
+    }
+
+    return function nextTick(fn) {
+        setTimeout(fn, 0);
     };
 })();
 
@@ -362,6 +384,7 @@ process.binding = function (name) {
         cwd = path.resolve(dir, cwd);
     };
 })();
+
 });
 
 require.define("/calc.js",function(require,module,exports,__dirname,__filename,process){// calculate totals of what I ate
@@ -390,6 +413,7 @@ function calculateTotal(eatenFood, availableFood) {
   return result;
 };
 
+
 });
 
 require.define("/calcExtra.js",function(require,module,exports,__dirname,__filename,process){// calculate totals of extra food
@@ -413,6 +437,7 @@ function calculateExtraTotal(extraFood) {
   return result;
 };
 
+
 });
 
 require.define("/roundTotal.js",function(require,module,exports,__dirname,__filename,process){// round float numbers into int
@@ -431,6 +456,7 @@ function roundTotal(total) {
 
   return result;
 };
+
 
 });
 
@@ -490,9 +516,10 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
 
     // don't add the food to available food since it's temporary
     if($scope.temporaryFood) {
-      newFood = null;
+      // newFood = null;
+      console.log('there');
       $scope.extra.push(newFood);
-      addExtraFoodToDB($http, $scope.extra, newFood, $scope.total);
+      // addExtraFoodToDB($http, $scope.extra, newFood, $scope.total);
     } else {
       // $scope.items.push(newFood);
       // $scope.addItem(
@@ -690,6 +717,7 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
     document.title = 'Y U NO BIG ?' + ' ' + calories;
   };
 });
+
 });
 require("/controllers.js");
 
@@ -719,6 +747,7 @@ function calculateTotal(eatenFood, availableFood) {
   return result;
 };
 
+
 });
 require("/calc.js");
 
@@ -742,6 +771,7 @@ function calculateExtraTotal(extraFood) {
 
   return result;
 };
+
 
 });
 require("/calcExtra.js");

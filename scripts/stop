@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# stopping all dev related processes
+killall mongod
+rm /data/db/mongod.lock
+killall node

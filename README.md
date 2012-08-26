@@ -24,7 +24,12 @@ setup
 run
 ---
 
-    node server.js
+    source scripts/start # start 4 processes: mongo, browserify, stylus and node server
+
+stop all processes
+------------------
+
+    source scripts/stop # stop the 4 processes that started with the 'start' script
 
 get big
 -------
@@ -41,8 +46,6 @@ i run it manually whenever i change client side js files:
 
     ./node_modules/browserify/bin/cmd.js public/js/controllers.js -o public/js/bundle.js -w
 
-there is a watch option but it's not working at the moment.  
-
 I use stylus for css.   
 It watches changes on styl files and compile them to .css  
 
@@ -53,10 +56,6 @@ it's great for development since i don't need to restart it manualy.
 
     supervisor node server.js
 
-here is a nice 1 liner to start development: run mongo, stylus, browserify and node server, all in the backgraund
-
-    mongod & ./node_modules/stylus/bin/stylus public/css/app.styl -w & ./node_modules/browserify/bin/cmd.js public/js/controllers.js public/js/calc.js public/js/calcExtra.js -o public/js/bundle.js -w & supervisor node server.js 
-    
 
 tech stack
 ----------
@@ -68,3 +67,11 @@ tech stack
 * [browserify](https://github.com/substack/node-browserify) - CommonJS for client-side js
 * [stylus](http://learnboost.github.com/stylus/) for nicer css
 
+
+mongo
+-----
+
+install - brew install mongodb
+start - mongod
+console - mongo
+stop - killall mongod && rm /data/db/mongod.lock

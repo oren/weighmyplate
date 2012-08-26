@@ -54,9 +54,10 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
 
     // don't add the food to available food since it's temporary
     if($scope.temporaryFood) {
-      newFood = null;
+      // newFood = null;
+      console.log('there');
       $scope.extra.push(newFood);
-      addExtraFoodToDB($http, $scope.extra, newFood, $scope.total);
+      // addExtraFoodToDB($http, $scope.extra, newFood, $scope.total);
     } else {
       // $scope.items.push(newFood);
       // $scope.addItem(
