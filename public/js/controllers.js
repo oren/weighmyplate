@@ -13,7 +13,6 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
   // comment when online
   getUser('test@gmail.com', $scope, $http);
 
-
   //event handlers
 
   // add numbers to daily total
@@ -36,6 +35,9 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
 
   // add extra food to totals and to db
   $scope.addExtra = function() {
+
+  console.log('scope', $scope);
+
     var newFood = {
       name: $scope.extraFood.name,
       cal: $scope.extraFood.cal ? parseInt($scope.extraFood.cal, 10) : 0,
@@ -54,14 +56,13 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
 
     // don't add the food to available food since it's temporary
     if($scope.temporaryFood) {
-      // newFood = null;
-      console.log('there');
       $scope.extra.push(newFood);
-      // addExtraFoodToDB($http, $scope.extra, newFood, $scope.total);
+      newFood = null;
+      addExtraFoodToDB($http, $scope.extra, newFood, $scope.total);
     } else {
-      // $scope.items.push(newFood);
-      // $scope.addItem(
-      // $scope.eaten.push({name: newFood.name, qty: 1});
+      $scope.items.push(newFood);
+      $scope.addItem(newFood);
+      addExtraFoodToDB($http, $scope.extra, newFood, $scope.total);
     };
     
     updateTitle($scope.roundedTotal.calories);
@@ -156,7 +157,6 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
   function addEatenFoodToDB($http, foodEaten, total, extra) {
     $http({method: 'PUT', url: '/user', data: {food: foodEaten, total: total, extraFood: extra}}).
       success(function(data, status, headers, config) {
-        console.log('add eaten food', data);
       }).
       error(function(data, status, headers, config) {
         // called asynchronously if an error occurs

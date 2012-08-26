@@ -88,6 +88,8 @@ function addUser() {
     { name: 'swiss cheese slice', cal: 106,  p: 7.54, c: 1.5, f: 7.78 } //27g
   ];
 
+  user.extraFood = [];
+
   users.save(user, function(err, data){
     if(err) {
       console.log('Error while adding food to DB', err);
