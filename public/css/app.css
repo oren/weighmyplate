@@ -1,4 +1,16 @@
 /* app css stylesheet */
+header.well {
+  background-color: #fff;
+}
+header #browserid {
+  float: right;
+}
+header .search-query {
+  margin-left: 20px;
+}
+header .edit {
+  margin-left: 5px;
+}
 .left {
   float: left;
   width: 180px;

@@ -34,12 +34,12 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
   };
 
   $scope.editFood = function() {
-    if($scope.editBtnText === 'Edit') {
+    if($scope.editBtnText === 'Edit Food') {
       $scope.availableFoodClass = 'btn btn-info';
-      $scope.editBtnText = 'Save';
+      $scope.editBtnText = 'Save Food';
     } else {
       $scope.availableFoodClass = 'btn';
-      $scope.editBtnText = 'Edit';
+      $scope.editBtnText = 'Edit Food';
     };
   };
 
@@ -218,7 +218,7 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
     $scope.extra = [];
     $scope.extraFood = null;
     $scope.availableFoodClass = 'btn';
-    $scope.editBtnText = 'Edit';
+    $scope.editBtnText = 'Edit Food';
   };
 
   // update food eaten box
