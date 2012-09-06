@@ -460,61 +460,6 @@ function roundTotal(total) {
 
 });
 
-require.define("/calc.js",function(require,module,exports,__dirname,__filename,process){// calculate totals of what I ate
-//
-// eatenFood - [{name: 'egg', qty: 10}, {name: 'chicken', qty: 1}]
-// availableFood - [{name: 'egg', cal: 80, p: 7, c: 3, f: 6}, {name: 'chicken', cals: 120, p: 7, c: 3, f: 6}]
-// result - {calories: 100, protein: 50, carbs: 12, fat: 4};
-module.exports = calculateTotal;
-
-function calculateTotal(eatenFood, availableFood) {
-  var result = {calories: 0, protein: 0, carbs: 0, fat: 0};
-
-  function calcFoodNutrition(food){
-    var filtered = availableFood.filter(function(element){
-      return (element.name === food.name)
-    });
-
-    result.calories += filtered[0].cal * food.qty;
-    result.protein += filtered[0].p* food.qty;
-    result.carbs += filtered[0].c* food.qty;
-    result.fat += filtered[0].f* food.qty;
-  };
-  
-  eatenFood.forEach(calcFoodNutrition);
-
-  return result;
-};
-
-
-});
-require("/calc.js");
-
-require.define("/calcExtra.js",function(require,module,exports,__dirname,__filename,process){// calculate totals of extra food
-//
-// availableFood - [{name: 'egg', cal: 80, p: 7, c: 3, f: 6}, {name: 'chicken', cals: 120, p: 7, c: 3, f: 6}]
-// result - {"cal":200,"p":27,"c":0,"f":11}
-module.exports = calculateExtraTotal;
-
-function calculateExtraTotal(extraFood) {
-  var result = {cal: 0, p: 0, c: 0, f: 0};
-
-  function addValues(element, index, array) {
-    result.cal += element.cal;
-    result.p += element.p;
-    result.c += element.c;
-    result.f += element.f;
-  };
-
-  extraFood.forEach(addValues);
-
-  return result;
-};
-
-
-});
-require("/calcExtra.js");
-
 require.define("/controllers.js",function(require,module,exports,__dirname,__filename,process){'use strict';
 
 /* Controllers */
@@ -551,7 +496,13 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
   };
 
   $scope.editFood = function() {
-    console.log('hi');
+    if($scope.editBtnText === 'Edit') {
+      $scope.availableFoodClass = 'btn btn-info';
+      $scope.editBtnText = 'Save';
+    } else {
+      $scope.availableFoodClass = 'btn';
+      $scope.editBtnText = 'Edit';
+    };
   };
 
   // add extra food to totals and to db
@@ -620,6 +571,20 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
     $scope.roundedTotal = roundTotal($scope.total);
     updateTitle($scope.roundedTotal.calories);
     
+    console.log($scope.eaten);
+    var qty;
+    $scope.eaten.forEach(function(value) {
+      // if value.qty is '' parseFloat will return NaN
+      qty = parseFloat(value.qty);
+      
+      if(isNaN(qty)) {
+        value.qty = 0;
+      } else {
+        value.qty = qty;
+      };
+    });
+
+    console.log($scope.eaten);
     addEatenFoodToDB($http, $scope.eaten, $scope.total, $scope.extra);
   };
 
@@ -714,6 +679,8 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
     $scope.eaten = [];
     $scope.extra = [];
     $scope.extraFood = null;
+    $scope.availableFoodClass = 'btn';
+    $scope.editBtnText = 'Edit';
   };
 
   // update food eaten box
@@ -779,4 +746,59 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
 
 });
 require("/controllers.js");
+
+require.define("/calc.js",function(require,module,exports,__dirname,__filename,process){// calculate totals of what I ate
+//
+// eatenFood - [{name: 'egg', qty: 10}, {name: 'chicken', qty: 1}]
+// availableFood - [{name: 'egg', cal: 80, p: 7, c: 3, f: 6}, {name: 'chicken', cals: 120, p: 7, c: 3, f: 6}]
+// result - {calories: 100, protein: 50, carbs: 12, fat: 4};
+module.exports = calculateTotal;
+
+function calculateTotal(eatenFood, availableFood) {
+  var result = {calories: 0, protein: 0, carbs: 0, fat: 0};
+
+  function calcFoodNutrition(food){
+    var filtered = availableFood.filter(function(element){
+      return (element.name === food.name)
+    });
+
+    result.calories += filtered[0].cal * food.qty;
+    result.protein += filtered[0].p* food.qty;
+    result.carbs += filtered[0].c* food.qty;
+    result.fat += filtered[0].f* food.qty;
+  };
+  
+  eatenFood.forEach(calcFoodNutrition);
+
+  return result;
+};
+
+
+});
+require("/calc.js");
+
+require.define("/calcExtra.js",function(require,module,exports,__dirname,__filename,process){// calculate totals of extra food
+//
+// availableFood - [{name: 'egg', cal: 80, p: 7, c: 3, f: 6}, {name: 'chicken', cals: 120, p: 7, c: 3, f: 6}]
+// result - {"cal":200,"p":27,"c":0,"f":11}
+module.exports = calculateExtraTotal;
+
+function calculateExtraTotal(extraFood) {
+  var result = {cal: 0, p: 0, c: 0, f: 0};
+
+  function addValues(element, index, array) {
+    result.cal += element.cal;
+    result.p += element.p;
+    result.c += element.c;
+    result.f += element.f;
+  };
+
+  extraFood.forEach(addValues);
+
+  return result;
+};
+
+
+});
+require("/calcExtra.js");
 })();

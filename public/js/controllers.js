@@ -34,7 +34,13 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
   };
 
   $scope.editFood = function() {
-    console.log('hi');
+    if($scope.editBtnText === 'Edit') {
+      $scope.availableFoodClass = 'btn btn-info';
+      $scope.editBtnText = 'Save';
+    } else {
+      $scope.availableFoodClass = 'btn';
+      $scope.editBtnText = 'Edit';
+    };
   };
 
   // add extra food to totals and to db
@@ -103,6 +109,20 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
     $scope.roundedTotal = roundTotal($scope.total);
     updateTitle($scope.roundedTotal.calories);
     
+    console.log($scope.eaten);
+    var qty;
+    $scope.eaten.forEach(function(value) {
+      // if value.qty is '' parseFloat will return NaN
+      qty = parseFloat(value.qty);
+      
+      if(isNaN(qty)) {
+        value.qty = 0;
+      } else {
+        value.qty = qty;
+      };
+    });
+
+    console.log($scope.eaten);
     addEatenFoodToDB($http, $scope.eaten, $scope.total, $scope.extra);
   };
 
@@ -197,6 +217,8 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
     $scope.eaten = [];
     $scope.extra = [];
     $scope.extraFood = null;
+    $scope.availableFoodClass = 'btn';
+    $scope.editBtnText = 'Edit';
   };
 
   // update food eaten box
