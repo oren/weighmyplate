@@ -45,6 +45,9 @@
             <input type="text" maxlength='3' class='span3' ng-model='item.qty' ng-change='qtyChanged()'>
             <span>{{item.name}}</span>
           </div>
+          <div ng-repeat="item in extra">
+            {{item.name}}
+          </div>
         </div>
       </div>
 
