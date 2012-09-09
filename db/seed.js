@@ -54,7 +54,7 @@ function addUser() {
     { name: 'sashimi', cal: 115, p: 25, c:0, f:1 },
     { name: '1 scallop', cal: 35, p: 2.9, c:1.68, f:2.9 },
 
-    { name: 'oats 60g', cal: 225, p: 7.5, c:40.5, f:4.5 },
+    { name: 'oats 100g', cal: 375, p: 12.5, c:67.5, f:7.5 },
     { name: 'steel cut oats 30g', cal: 113, p: 3.8, c:20.3, f:1.9 }, // calorie king
     { name: 'milk %1 100g', cal: 48, p: 4, c:5.6, f:1 },
     { name: 'parmesan cheese 1tbsp', cal: 20, p: 2, c:0, f:1.5 },
