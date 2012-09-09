@@ -1,6 +1,6 @@
 /* app css stylesheet */
 header.well {
-  background-color: #fff;
+  background-color: #3d668f;
 }
 header #browserid {
   float: right;
@@ -12,11 +12,19 @@ header .edit {
   margin-left: 5px;
 }
 .total {
-  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #eee;
+  margin-bottom: 10px;
+}
+.total th,
+.total td {
+  border-top: none;
+}
+.total .cal {
+  font-weight: bold;
 }
 .total td:nth-child(2) {
   float: right;
-  margin-left: 15px;
 }
 .eaten button {
   margin-bottom: 10px;
@@ -26,6 +34,7 @@ header .edit {
 }
 .eaten input[type='text'] {
   width: 40px;
+  margin-right: 5px;
 }
 .available-food {
   overflow: hidden;
