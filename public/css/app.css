@@ -19,6 +19,7 @@ header .edit {
 .total th,
 .total td {
   border-top: none;
+  line-height: 16px;
 }
 .total .cal {
   font-weight: bold;
