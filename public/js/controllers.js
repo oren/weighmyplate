@@ -41,11 +41,11 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
 
   $scope.editFood = function() {
     if($scope.editBtnText === 'Edit Food') {
-      $scope.availableFoodClass = 'btn btn-info';
+      $scope.availableFoodClass = 'btn';
       $scope.editBtnText = 'Save Food';
       $scope.editBtnClass = 'save';
     } else {
-      $scope.availableFoodClass = 'btn';
+      $scope.availableFoodClass = 'btn edit';
       $scope.editBtnText = 'Edit Food';
       $scope.editBtnClass = 'edit';
     };

@@ -7,6 +7,10 @@ header #browserid {
   color: #bcfc3d;
 /* color white */
 }
+header .sign-out {
+  float: right;
+  color: #bcfc3d;
+}
 header .search-query {
   margin-left: 20px;
 }
@@ -16,7 +20,7 @@ header .edit {
 }
 header .save {
   margin-left: 5px;
-  padding: 4px 7px 4px 14px;
+  padding: 4px 6px 4px 14px;
 }
 .addFood {
   margin-left: 10px;
@@ -77,6 +81,9 @@ header .save {
   background-image: linear-gradient(top, #62c462, #51a351);
   background-repeat: repeat-x;
   border-color: #51a351 #51a351 #387038;
+}
+.available-food .edit {
+  color: #3d668f;
 }
 .box {
   background-color: #eee;
