@@ -45,8 +45,7 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
 
   // add extra food to totals and to db
   $scope.addExtra = function() {
-
-  console.log('scope', $scope);
+    console.log('scope', $scope);
 
     var newFood = {
       name: $scope.extraFood.name,
