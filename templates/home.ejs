@@ -41,6 +41,7 @@
           </button>
 
           <div ng-repeat="item in eaten">
+            <button class='btn btn-link' type='button'> <i class="icon-trash"></i></button>
             <input type="text" maxlength='3' class='span3' ng-model='item.qty' ng-change='qtyChanged()'>
             <span>{{item.name}}</span>
           </div>

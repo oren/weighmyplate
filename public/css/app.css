@@ -39,6 +39,12 @@ header .edit {
   width: 40px;
   margin-right: 5px;
 }
+.eaten .btn-link {
+  padding: 0;
+}
+.eaten span {
+  position: absolute;
+}
 .available-food {
   overflow: hidden;
 }
