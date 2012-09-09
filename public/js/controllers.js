@@ -170,8 +170,13 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
       i += 1;
     });
 
+    console.log('total', $scope.total);
+
     addEatenFoodToDB($http, $scope.eaten, $scope.total);
     updateTitle($scope.roundedTotal.calories);
+    if ($scope.total.calories === 0) {
+      $scope.foodEaten = false;
+    }
   };
 
   $scope.qtyChanged = function() {
@@ -194,7 +199,7 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
           $scope.total = data.total;
           $scope.roundedTotal = roundTotal($scope.total);
         };
-        if(data.total !== undefined) {
+        if(data.total !== undefined && data.total.calories !== 0) {
           $scope.extra = data.extraFood;
           $scope.foodEaten = true;
           updateTitle($scope.roundedTotal.calories);

@@ -44,7 +44,6 @@ function addEatenFood(req, res) {
   req.on('end', function () {
     var userID = 1;
     var data = JSON.parse(payload);
-    console.log('data', data);
 
     // add to available food
     if(data.newFood) {
@@ -59,7 +58,7 @@ function addEatenFood(req, res) {
       });
     }
 
-    console.log('addin eaten food');
+    console.log('adding eaten food');
     users.addEatenFood(userID, data, function(err, user) { 
       if(err) {
         res.statusCode = 500;
