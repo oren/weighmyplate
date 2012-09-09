@@ -11,29 +11,25 @@ header .search-query {
 header .edit {
   margin-left: 5px;
 }
-.left {
-  float: left;
-  width: 180px;
-}
-.left .total {
+.total {
   width: 150px;
   margin-bottom: 20px;
 }
-.left .total td:nth-child(2) {
+.total td:nth-child(2) {
   float: right;
   margin-left: 15px;
 }
-.left .eaten {
+.eaten {
   width: 150px;
 }
-.left .eaten button {
+.eaten button {
   margin-bottom: 10px;
 }
-.left .eaten td:nth-child(2) {
+.eaten td:nth-child(2) {
   margin-left: 15px;
 }
-.left .eaten input[type='text'] {
-  width: 23px;
+.eaten input[type='text'] {
+  width: 40px;
 }
 .available-food {
   overflow: hidden;
@@ -55,8 +51,6 @@ header .edit {
   background-image: linear-gradient(top, #62c462, #51a351);
   background-repeat: repeat-x;
   border-color: #51a351 #51a351 #387038;
-/* filter: progid:dximagetransform.microsoft.gradient(startColorstr='#62c462',endColorstr='#51a351',GradientType=0); */
-/* filter: progid:dximagetransform.microsoft.gradient(enabled=false); */
 }
 .box {
   background-color: #eee;

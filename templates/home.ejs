@@ -14,58 +14,49 @@
     <a href="#" id="browserid" title="Sign-in with BrowserID" ng-click='signIn()' ng-hide='hideSignup'>  
       <img src="/images/sign_in_blue.png" alt="Sign in">  
     </a>
-
     <button ng-click='addFood()' ng-show='addButton' class='btn add-extra' type='button'>+ New Food</button>
-
     <button ng-click='editFood()' class='btn edit' type='button'>{{editBtnText}}</button>
-
     <input ng-model="searchText" type="text" class="input-large search-query" placeholder='Filter Food' autofocus>
-
   </header>
 
-    <form class="well form-inline" ng-show="showAdd">
-      <input type="text" class="" placeholder="Name" ng-model='extraFood.name'>
-      <input type="text" class="input-small" placeholder="Calories" ng-model='extraFood.cal'>
-      <input type="text" class="input-small" placeholder="Protein" ng-model='extraFood.p'>
-      <input type="text" class="input-small" placeholder="Carbs" ng-model='extraFood.c'>
-      <input type="text" class="input-small" placeholder="Fat" ng-model='extraFood.f'>
+  <form class="well form-inline" ng-show="showAdd">
+    <input type="text" class="" placeholder="Name" ng-model='extraFood.name'>
+    <input type="text" class="input-small" placeholder="Calories" ng-model='extraFood.cal'>
+    <input type="text" class="input-small" placeholder="Protein" ng-model='extraFood.p'>
+    <input type="text" class="input-small" placeholder="Carbs" ng-model='extraFood.c'>
+    <input type="text" class="input-small" placeholder="Fat" ng-model='extraFood.f'>
 
-      <button type="button" class="btn" ng-click="addExtra()">Add</button>
-      <button type="button" class="btn" ng-click="cancelAdd()">Cancel</button>
-      <input type="checkbox" ng-model='temporaryFood'/> Temporary food
-    </form>
-  <div class='left'>
-    <ng:include src="'templates/total.ejs'"></ng:include>
+    <button type="button" class="btn" ng-click="addExtra()">Add</button>
+    <button type="button" class="btn" ng-click="cancelAdd()">Cancel</button>
+    <input type="checkbox" ng-model='temporaryFood'/> Temporary food
+  </form>
 
-    <!-- <div class='clearfix'></div> -->
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span2">
+        <ng:include src="'templates/total.ejs'"></ng:include>
 
-    <div class='eaten box' ng-show="foodEaten">
-      <button class='btn btn-block' type='button' ng-click="clear()">
-        Clear
-      </button>
+        <div class='eaten box' ng-show="foodEaten">
+          <button class='btn btn-block' type='button' ng-click="clear()">
+            Clear
+          </button>
 
-      <table border="0">
-        <tr ng-repeat="item in eaten">
-          <td> <input type="text" maxlength='3' ng-model="item.qty" ng-change="qtyChanged()"/> </td>
-          <td>{{item.name}}</td>
-        </tr>
-
-        <tr ng-repeat="item in extra">
-          <td>{{item.name}}</td>
-        </tr>
-      </table>
+          <div ng-repeat="item in eaten">
+            <input type="text" maxlength='3' class='span3' ng-model='item.qty' ng-change='qtyChanged()'>
+            <span>{{item.name}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="span10">
+        <div class='available-food'>
+          <button ng-repeat='item in items | filter:searchText' ng-class='availableFoodClass' type='button' ng-click='addItem(item)'>
+            {{item.name}}
+          </button>
+          <div class='clearfix'> </div>
+        </div>
+      </div>
     </div>
   </div>
-
-  <div class='available-food'>
-
-    <button ng-repeat='item in items | filter:searchText' ng-class='availableFoodClass' type='button' ng-click='addItem(item)'>
-      {{item.name}}
-    </button>
-
-    <div class='clearfix'> </div>
-  </div>
-
 
   <script src="https://browserid.org/include.js" type="text/javascript"></script>  
   <script src="lib/angular/angular-1.0.1.min.js"></script>
