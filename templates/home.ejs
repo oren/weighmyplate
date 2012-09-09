@@ -38,18 +38,17 @@
         <ng:include src="'templates/total.ejs'"></ng:include>
 
         <div class='eaten box' ng-show="foodEaten">
-          <button class='btn btn-block' type='button' ng-click="clear()">
-            <i class="icon-trash"></i> Clear
-          </button>
-
           <div ng-repeat="item in eaten" class='food'>
-            <button class='btn btn-link' type='button' ng-click='clearOne(item)'><i class="icon-trash"></i></button>
+            <button class='btn btn-link' type='button' ng-click='clearOne(item)'><em>x</em></button>
             <input type="text" maxlength='3' class='span3' ng-model='item.qty' ng-change='qtyChanged()'>
             <span>{{item.name}}</span>
           </div>
           <div ng-repeat="item in extra">
             {{item.name}}
           </div>
+          <button class='btn btn-block' type='button' ng-click="clear()">
+            <i class="icon-trash"></i> Clear
+          </button>
         </div>
       </div>
 
