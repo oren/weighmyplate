@@ -546,7 +546,7 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
   };
 
   $scope.addFood = function() {
-    // $scope.addButton = false;
+    $scope.searchText = '';
     if ($scope.showAdd) {
       $scope.addIcon = 'icon-plus';
       $scope.showAdd = false;
@@ -557,6 +557,7 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
   };
 
   $scope.editFood = function() {
+    $scope.searchText = '';
     if($scope.editBtnText === 'Edit Food') {
       $scope.availableFoodClass = 'btn btn-success';
       $scope.editBtnText = 'Save Food';
