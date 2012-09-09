@@ -12,15 +12,11 @@ header .edit {
   margin-left: 5px;
 }
 .total {
-  width: 150px;
   margin-bottom: 20px;
 }
 .total td:nth-child(2) {
   float: right;
   margin-left: 15px;
-}
-.eaten {
-  width: 150px;
 }
 .eaten button {
   margin-bottom: 10px;
