@@ -13,8 +13,8 @@
     <a href="#" id="browserid" title="Sign-in with BrowserID" ng-click='signIn()' ng-hide='hideSignup'>  
       Sign in
     </a>
-    <button ng-click='addFood()' ng-show='addButton' class='btn add-extra' type='button'><i class="icon-plus"></i> New Food</button>
-    <button ng-click='editFood()' class='btn edit' type='button'><i class="icon-pencil"></i> {{editBtnText}}</button>
+    <button ng-click='addFood()' ng-show='addButton' class='btn add-extra' type='button'><i class="{{addIcon}}"></i> New Food</button>
+    <button ng-click='editFood()' class='btn {{editBtnClass}}' type='button'><i class="icon-pencil"></i> {{editBtnText}}</button>
     <input ng-model="searchText" type="text" class="input-large search-query" placeholder='Filter Food' autofocus>
   </header>
 
@@ -25,9 +25,8 @@
     <input type="text" class="input-small" placeholder="Carbs" ng-model='extraFood.c'>
     <input type="text" class="input-small" placeholder="Fat" ng-model='extraFood.f'>
 
-    <button type="button" class="btn" ng-click="addExtra()">Add</button>
-    <button type="button" class="btn" ng-click="cancelAdd()">Cancel</button>
     <input type="checkbox" ng-model='temporaryFood'/> Temporary food
+    <button type="button" class="btn addFood" ng-click="addExtra()">Add</button>
   </form>
 
   <div class="container-fluid">
@@ -40,7 +39,7 @@
             <i class="icon-trash"></i> Clear
           </button>
 
-          <div ng-repeat="item in eaten">
+          <div ng-repeat="item in eaten" class='food'>
             <button class='btn btn-link' type='button'> <i class="icon-trash"></i></button>
             <input type="text" maxlength='3' class='span3' ng-model='item.qty' ng-change='qtyChanged()'>
             <span>{{item.name}}</span>

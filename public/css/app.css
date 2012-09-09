@@ -12,6 +12,14 @@ header .search-query {
 }
 header .edit {
   margin-left: 5px;
+  padding: 4px 14px;
+}
+header .save {
+  margin-left: 5px;
+  padding: 4px 7px 4px 14px;
+}
+.addFood {
+  margin-left: 10px;
 }
 .total {
   padding: 10px;
@@ -29,6 +37,9 @@ header .edit {
 .total td:nth-child(2) {
   float: right;
 }
+.eaten .food {
+  position: relative;
+}
 .eaten button {
   margin-bottom: 10px;
 }
@@ -44,6 +55,7 @@ header .edit {
 }
 .eaten span {
   position: absolute;
+  top: 3px;
 }
 .available-food {
   overflow: hidden;

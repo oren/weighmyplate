@@ -29,17 +29,25 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
   };
 
   $scope.addFood = function() {
-    $scope.addButton = false;
-    $scope.showAdd = true;
+    // $scope.addButton = false;
+    if ($scope.showAdd) {
+      $scope.addIcon = 'icon-plus';
+      $scope.showAdd = false;
+    } else {
+      $scope.addIcon = 'icon-minus';
+      $scope.showAdd = true;
+    }
   };
 
   $scope.editFood = function() {
     if($scope.editBtnText === 'Edit Food') {
       $scope.availableFoodClass = 'btn btn-info';
       $scope.editBtnText = 'Save Food';
+      $scope.editBtnClass = 'save';
     } else {
       $scope.availableFoodClass = 'btn';
       $scope.editBtnText = 'Edit Food';
+      $scope.editBtnClass = 'edit';
     };
   };
 
@@ -218,6 +226,8 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
     $scope.extraFood = null;
     $scope.availableFoodClass = 'btn';
     $scope.editBtnText = 'Edit Food';
+    $scope.editBtnClass = 'edit';
+    $scope.addIcon = 'icon-plus';
   };
 
   // update food eaten box
