@@ -662,6 +662,7 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
 
   $scope.clearOne = function(item) {
     console.log(item);
+    var qty = item.qty;
 
     // find food in available food
     $scope.items.forEach(function(available) {
@@ -670,10 +671,10 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
       };
     });
 
-    $scope.total.calories -= item.cal;
-    $scope.total.protein -= item.p;
-    $scope.total.carbs -= item.c;
-    $scope.total.fat -= item.f;
+    $scope.total.calories -= item.cal * qty;
+    $scope.total.protein -= item.p * qty;
+    $scope.total.carbs -= item.c * qty;
+    $scope.total.fat -= item.f * qty;
     $scope.roundedTotal = roundTotal($scope.total);
 
     var i = 0;
