@@ -22,8 +22,9 @@ header .save {
   margin-left: 5px;
   padding: 4px 6px 4px 14px;
 }
-.addFood {
+.tmpFood {
   margin-left: 10px;
+  font-size: 12px;
 }
 .total {
   padding: 10px;
@@ -44,18 +45,14 @@ header .save {
 .eaten .food {
   position: relative;
 }
-.eaten button {
-  margin-bottom: 10px;
-}
-.eaten td:nth-child(2) {
-  margin-left: 15px;
+.eaten .close {
+  float: left;
+  margin-top: 3px;
+  margin-right: 3px;
 }
 .eaten input[type='text'] {
   width: 40px;
   margin-right: 5px;
-}
-.eaten .btn-link {
-  padding: 0;
 }
 .eaten span {
   position: absolute;
@@ -63,6 +60,14 @@ header .save {
 }
 .eaten em {
   color: #000;
+}
+.eaten .clear em {
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 20px;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  opacity: 0.2;
 }
 .available-food {
   overflow: hidden;
