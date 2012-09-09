@@ -143,6 +143,36 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
     updateTitle($scope.roundedTotal.calories);
   };
 
+  $scope.clearOne = function(item) {
+    console.log(item);
+
+    // find food in available food
+    $scope.items.forEach(function(available) {
+      if(item.name === available.name) {
+        item = available
+      };
+    });
+
+    $scope.total.calories -= item.cal;
+    $scope.total.protein -= item.p;
+    $scope.total.carbs -= item.c;
+    $scope.total.fat -= item.f;
+    $scope.roundedTotal = roundTotal($scope.total);
+
+    var i = 0;
+
+    // remove item from eaten array
+    $scope.eaten.forEach(function(value) {
+      if(item.name === value.name) {
+        $scope.eaten.splice(i,1);
+      };
+      i += 1;
+    });
+
+    addEatenFoodToDB($http, $scope.eaten, $scope.total);
+    updateTitle($scope.roundedTotal.calories);
+  };
+
   $scope.qtyChanged = function() {
     $scope.update();
   };

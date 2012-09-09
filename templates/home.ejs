@@ -40,7 +40,7 @@
           </button>
 
           <div ng-repeat="item in eaten" class='food'>
-            <button class='btn btn-link' type='button'> <i class="icon-trash"></i></button>
+            <button class='btn btn-link' type='button' ng-click='clearOne(item)'><i class="icon-trash"></i></button>
             <input type="text" maxlength='3' class='span3' ng-model='item.qty' ng-change='qtyChanged()'>
             <span>{{item.name}}</span>
           </div>
