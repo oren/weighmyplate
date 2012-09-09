@@ -21,15 +21,21 @@
     <input ng-model="searchText" type="text" class="input-large search-query" placeholder='Filter Food' autofocus>
   </header>
 
-  <form class="well form-inline" ng-show="showAdd">
-    <input type="text" class="" placeholder="Name" ng-model='extraFood.name'>
-    <input type="text" class="input-small" placeholder="Calories" ng-model='extraFood.cal'>
-    <input type="text" class="input-small" placeholder="Protein" ng-model='extraFood.p'>
-    <input type="text" class="input-small" placeholder="Carbs" ng-model='extraFood.c'>
-    <input type="text" class="input-small" placeholder="Fat" ng-model='extraFood.f'>
+  <form class="well" ng-show="showAdd">
+    <div class="control-group form-inline">
+      <input type="text" class="input-medium" placeholder="Name" ng-model='extraFood.name'>
+      <input type="text" class="span1" placeholder="Cals" ng-model='extraFood.cal'>
+      <input type="text" class="span1" placeholder="Prot" ng-model='extraFood.p'>
+      <input type="text" class="span1" placeholder="Carbs" ng-model='extraFood.c'>
+      <input type="text" class="span1" placeholder="Fat" ng-model='extraFood.f'>
+      <button type="button" class="btn addFood" ng-click="addExtra()">Add</button>
+    </div>
 
-    <input type="checkbox" ng-model='temporaryFood'/> Temporary food
-    <button type="button" class="btn addFood" ng-click="addExtra()">Add</button>
+    <div class='clearfix'> </div>
+
+    <label class="checkbox">
+      <input type="checkbox" ng-model='temporaryFood'> Temporary food (will not be saved)
+    </label>
   </form>
 
   <div class="container-fluid">
