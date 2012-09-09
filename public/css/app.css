@@ -4,6 +4,8 @@ header.well {
 }
 header #browserid {
   float: right;
+  color: #bcfc3d;
+/* color white */
 }
 header .search-query {
   margin-left: 20px;

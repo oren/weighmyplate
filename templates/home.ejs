@@ -11,10 +11,10 @@
 <body ng-controller='FoodCtrl' ng-cloak>
   <header class='well'>
     <a href="#" id="browserid" title="Sign-in with BrowserID" ng-click='signIn()' ng-hide='hideSignup'>  
-      <img src="/images/sign_in_blue.png" alt="Sign in">  
+      Sign in
     </a>
-    <button ng-click='addFood()' ng-show='addButton' class='btn add-extra' type='button'>+ New Food</button>
-    <button ng-click='editFood()' class='btn edit' type='button'>{{editBtnText}}</button>
+    <button ng-click='addFood()' ng-show='addButton' class='btn add-extra' type='button'><i class="icon-plus"></i> New Food</button>
+    <button ng-click='editFood()' class='btn edit' type='button'><i class="icon-pencil"></i> {{editBtnText}}</button>
     <input ng-model="searchText" type="text" class="input-large search-query" placeholder='Filter Food' autofocus>
   </header>
 
@@ -37,7 +37,7 @@
 
         <div class='eaten box' ng-show="foodEaten">
           <button class='btn btn-block' type='button' ng-click="clear()">
-            Clear
+            <i class="icon-trash"></i> Clear
           </button>
 
           <div ng-repeat="item in eaten">
