@@ -1,12 +1,9 @@
-# weighmyplate
-
+# [www.weighmyplate.com](http://weighmyplate.com)
 
 Calorie counting should be quick and get out of your way.  
 this is my attempt in makeing things simpler.
 
-[The Website](http://weighmyplate.com)
-
-![Y U NO BIG?](http://images2.fanpop.com/image/photos/11400000/mini-cat-cats-11415636-159-142.jpg)
+![weighmyplate](http://images2.fanpop.com/image/photos/11400000/mini-cat-cats-11415636-159-142.jpg)
 
 ## install
 
