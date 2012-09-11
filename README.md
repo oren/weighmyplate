@@ -1,65 +1,44 @@
-Y U NO BIG?
-===========
+# weighmyplate
+
 
 Calorie counting should be quick and get out of your way.  
-the current websites/apps sucks since it takes too much time and not always intuitive to use.  
-this site is my attempt in makeing things simpler.
+this is my attempt in makeing things simpler.
 
-[The Website](http://108.227.82.183:3000)
+[The Website](http://weighmyplate.com)
 
 ![Y U NO BIG?](http://images2.fanpop.com/image/photos/11400000/mini-cat-cats-11415636-159-142.jpg)
 
-install
--------
+## install
 
-    install node.js from http://nodejs.org/
+    install [node.js](http://nodejs.org/)
+    install [mongodb](http://www.mongodb.org/)
     npm install # install dependencies
-    npm install supervisor -g
+    npm install supervisor forever -g
 
-setup
------
+## setup
 
-    mongod &
     make db-seed  # load food to DB
 
-run
----
+## run
 
     source scripts/start # start 4 processes: mongo, browserify, stylus and node server
+    http://localhost:3000
 
-stop all processes
-------------------
+## stop all processes
 
     source scripts/stop # stop the 4 processes that started with the 'start' script
 
-get big
--------
 
-    http://localhost:3000
+## tools used
 
-develop
--------
+* browserify - enjoy CommonJS awesomeness in the client side js.  
+  it's a command line tool that you run against your js files and bundle them into 1 file (bundle.js).  
+* stylus - nicer than css
+  It watches changes on styl files and compile them to .css  
+* supervisor - restart the node server whenever the code changes.  
+  it's great for development since i don't need to restart it manualy.  
 
-I use browserify to enjoy CommonJS awesomeness in the client side js.  
-it's a command line tool that you run against your js files and bundle them into 1 file.  
-in my case it's bundle.js  
-i run it manually whenever i change client side js files:  
-
-    ./node_modules/browserify/bin/cmd.js public/js/controllers.js -o public/js/bundle.js -w
-
-I use stylus for css.   
-It watches changes on styl files and compile them to .css  
-
-    ./node_modules/stylus/bin/stylus public/css/app.styl -w  
-
-I use supervisor package to restart the node server whenever the code changes.  
-it's great for development since i don't need to restart it manualy.  
-
-    supervisor node server.js
-
-
-tech stack
-----------
+## tech stack
 
 * [Node.js](http://nodejs.org/) - server side code
 * [MongoDB](http://www.mongodb.org/) - DB
@@ -68,11 +47,9 @@ tech stack
 * [browserify](https://github.com/substack/node-browserify) - CommonJS for client-side js
 * [stylus](http://learnboost.github.com/stylus/) for nicer css
 
+## mongo commands
 
-mongo
------
-
-install - brew install mongodb
-start - mongod
-console - mongo
-stop - killall mongod && rm /data/db/mongod.lock
+install - brew install mongodb  
+start - mongod  
+console - mongo  
+stop - killall mongod && rm /data/db/mongod.lock  
