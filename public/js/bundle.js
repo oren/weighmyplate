@@ -786,7 +786,7 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
   };
 
   function updateTitle(calories) {
-    document.title = 'Y U NO BIG ?' + ' ' + calories;
+    document.title = calories;
   };
 });
 
