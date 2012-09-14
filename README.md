@@ -7,8 +7,9 @@ this is my attempt in makeing things simpler.
 
 ## install
 
-    install [node.js](http://nodejs.org/)
-    install [mongodb](http://www.mongodb.org/)
+  install [node.js](http://nodejs.org/)
+  install [mongodb](http://www.mongodb.org/)
+
     npm install # install dependencies
     npm install supervisor forever -g
 
@@ -20,6 +21,10 @@ this is my attempt in makeing things simpler.
 
     source scripts/start # start 4 processes: mongo, browserify, stylus and node server
     http://localhost:3000
+
+## run in production
+
+    sudo NODE_ENV=production node server.js  
 
 ## stop all processes
 
