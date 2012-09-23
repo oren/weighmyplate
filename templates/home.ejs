@@ -43,7 +43,7 @@
           <div ng-repeat="item in eaten" class='food'>
             <button ng-click='clearOne(item)' class="close">&times;</button>
             <input type="text" maxlength='3' class='span3' ng-model='item.qty' ng-change='qtyChanged()'>
-            <span>{{item.name}}</span>
+            <span ng-cloak>{{item.name}}</span>
           </div>
           <div ng-repeat="item in extra">
             {{item.name}}
@@ -54,9 +54,12 @@
 
       <div class="span10">
         <div class='available-food'>
-          <button ng-repeat='item in items | filter:searchText' alt='test' ng-class='availableFoodClass' type='button' ng-click='addItem(item)'>
-            {{item.name}}
-          </button>
+          <div ng-repeat='item in items | filter:searchText' >
+            <button alt='test' ng-class='availableFoodClass' type='button' ng-click='addItem(item)'>
+              {{item.name}}
+            </button>
+            <span>{{item.desc}}</span>
+          </div>
           <div class='clearfix'> </div>
         </div>
       </div>
