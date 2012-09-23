@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="css/app.css"/>
 </head>
 
-<body ng-controller='FoodCtrl' ng-cloak>
+<body ng-controller='FoodCtrl'>
   <header class='well'>
     <a href="#" id="browserid" title="Sign-in with BrowserID" ng-click='signIn()' ng-hide='hideSignup'>  
       Sign in
@@ -16,8 +16,8 @@
     <a href="#" class='sign-out' title="Sign-in with BrowserID" ng-click='signOut()' ng-show='hideSignup'>  
       Sign out
     </a>
-    <button ng-click='addFood()' ng-show='addButton' class='btn add-extra' type='button'><i class="{{addIcon}}"></i> New Food</button>
-    <button ng-click='editFood()' class='btn {{editBtnClass}}' type='button'><i class="icon-pencil"></i> {{editBtnText}}</button>
+    <button ng-click='addFood()' ng-show='addButton' ng-cloak class='btn add-extra' type='button'><i class="{{addIcon}}"></i> New Food</button>
+    <button ng-click='editFood()' ng-cloak class='btn {{editBtnClass}}' type='button'><i class="icon-pencil"></i> {{editBtnText}}</button>
     <input ng-model="searchText" type="text" class="input-large search-query" placeholder='Filter Food' autofocus>
   </header>
 
@@ -64,13 +64,12 @@
   </div>
 
   <script src="https://browserid.org/include.js" type="text/javascript"></script>  
-  <script src="lib/angular/angular-1.0.1.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.min.js"></script>
   <script src="lib/angular/angular-cookies-1.0.1.min.js"></script>
   <script src="js/app.js"></script>
   <script src="js/services.js"></script>
   <script src="js/bundle.js"></script>
   <script src="js/filters.js"></script>
   <script src="js/directives.js"></script>
-  <script>console.log('heee');</script>
 </body>
 </html>
