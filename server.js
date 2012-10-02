@@ -35,6 +35,7 @@ db.open(function(err, db) {
     router.define( '/user', require('./routes/user.js') );
     router.define( '/', require('./routes/home.js') );
     router.define( '/login', require('./routes/login.js') );
+    router.define( '/health', require('./routes/health.js') );
     // route static files
     router.define( '/*', require('./routes/static.js') )
   }
