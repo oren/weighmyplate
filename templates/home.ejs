@@ -35,34 +35,49 @@
   </form>
 
   <div class="container-fluid">
-    <div class="row-fluid">
-      <div class="span2">
-        <ng:include src="'templates/total.ejs'"></ng:include>
-
-        <div class='eaten box' ng-show="foodEaten">
-          <div ng-repeat="item in eaten" class='food'>
-            <button ng-click='clearOne(item)' class="close">&times;</button>
-            <input type="text" maxlength='3' class='span3' ng-model='item.qty' ng-change='qtyChanged()'>
-            <span ng-cloak>{{item.name}}</span>
-          </div>
-          <div ng-repeat="item in extra">
-            {{item.name}}
-          </div>
-          <button class='btn btn-block clear' type='button' ng-click="clear()"><em>&times;</em> Clear All</button>
-        </div>
+    <div class='left'>
+      <div class='box total'>
+        <table border="0" class='table table-condensed total'>
+          <tr class='cal'>
+            <td>calories</td>
+            <td>{{roundedTotal.calories}}</td>
+          </tr>
+          <tr>
+            <td>protein</td>
+            <td>{{roundedTotal.protein}}</td>
+          </tr>
+          <tr>
+            <td>carbs</td>
+            <td>{{roundedTotal.carbs}}</td>
+          </tr>
+          <tr>
+            <td>fat</td>
+            <td>{{roundedTotal.fat}}</td>
+          </tr>
+        </table>
       </div>
 
-      <div class="span10">
-        <div class='available-food' ng-controller='EatenCtrl'>
-          <div ng-repeat='item in items | filter:searchText' >
-            <button alt='test' ng-class='availableFoodClass' type='button' ng-click='addItem(item)'>
-              {{item.name}}
-            </button>
-            <span>{{item.desc}}</span>
-          </div>
-          <div class='clearfix'> </div>
+      <div class='eaten box' ng-show="foodEaten">
+        <div ng-repeat="item in eaten" class='food'>
+          <button ng-click='clearOne(item)' class="close">&times;</button>
+          <input type="text" maxlength='3' class='span3' ng-model='item.qty' ng-change='qtyChanged()'>
+          <span ng-cloak>{{item.name}}</span>
         </div>
+        <div ng-repeat="item in extra">
+          {{item.name}}
+        </div>
+        <button class='btn btn-block clear' type='button' ng-click="clear()"><em>&times;</em> Clear All</button>
       </div>
+    </div>
+
+    <div class='available-food' ng-controller='EatenCtrl'>
+      <div ng-repeat='item in items | filter:searchText' >
+        <button alt='test' ng-class='availableFoodClass' type='button' ng-click='addItem(item)'>
+          {{item.name}}
+        </button>
+        <span>{{item.desc}}</span>
+      </div>
+      <div class='clearfix'> </div>
     </div>
   </div>
 

@@ -22,11 +22,15 @@ header .save {
   margin-left: 5px;
   padding: 4px 6px 4px 14px;
 }
+.left {
+  margin-bottom: 10px;
+}
 .tmpFood {
   margin-left: 10px;
   font-size: 12px;
 }
 .total {
+  width: 150px;
   padding: 10px;
   background-color: #eee;
   margin-bottom: 10px;
@@ -41,6 +45,12 @@ header .save {
 }
 .total td:nth-child(2) {
   float: right;
+}
+.eaten {
+  width: 150px;
+/*   background transparent */
+/*   border 0 */
+/*   -webkit-appearance none */
 }
 .eaten .food {
   position: relative;
@@ -70,6 +80,7 @@ header .save {
   opacity: 0.2;
 }
 .available-food {
+/* float right */
   overflow: hidden;
 }
 .available-food .add-extra {
@@ -100,3 +111,15 @@ header .save {
   border-radius: 6px;
   padding: 10px;
 }
+/* @media only screen and (min-width: 480px)  */
+@media only screen and (min-width: 600px) {
+  .left {
+    float: left;
+    margin-right: 10px;
+  }
+}
+/* @media only screen and (min-width: 768px)  */
+/*  */
+/* @media only screen and (min-width: 992px)  */
+/*  */
+/* @media only screen and (min-width: 1382px)  */
