@@ -54,4 +54,4 @@ this is my attempt in makeing things simpler.
 install - brew install mongodb  
 start - mongod  
 console - mongo  
-stop - killall mongod && rm /data/db/mongod.lock  
+stop - killall mongod && rm /data/db/mongod.lock  # on debian: sudo rm /var/lib/mongodb/mongod.lock 

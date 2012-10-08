@@ -13,6 +13,7 @@ var templarOptions = { engine: config.engine, folder: config.templates };
 var router = new mapleTree.RouteTree();
 Templar.loadFolder('./templates')
 var webSitePort = process.env.PORT || config.port;
+console.log('port', process.env.PORT);
 
 // db stuff
 var mongoHost = process.env['MONGO_HOST'] != null ? process.env['MONGO_HOST'] : 'localhost';
