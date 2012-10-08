@@ -50,4 +50,3 @@ http.createServer(function(req, res) {
 }).listen(webSitePort);
 
 console.log('website running. port ' + webSitePort);
-console.error('error - test');

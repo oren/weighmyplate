@@ -3,6 +3,16 @@
 /* Controllers */
 
 // function FoodCtrl($scope, $http, $cookies) {
+
+angular.module('calApp').controller('AvailableCtrl', function($scope, $http, $cookies) {
+
+});
+
+angular.module('calApp').controller('EatenCtrl', function($scope, $http, $cookies) {
+
+});
+
+// function FoodCtrl($scope, $http, $cookies) {
 angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies) {
   var calcTotal = require('./calc.js');
   var calcExtraTotal = require('./calcExtra.js');

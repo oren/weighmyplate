@@ -53,7 +53,7 @@
       </div>
 
       <div class="span10">
-        <div class='available-food'>
+        <div class='available-food' ng-controller='EatenCtrl'>
           <div ng-repeat='item in items | filter:searchText' >
             <button alt='test' ng-class='availableFoodClass' type='button' ng-click='addItem(item)'>
               {{item.name}}
