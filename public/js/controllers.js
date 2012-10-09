@@ -23,6 +23,47 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
   // comment when online
   getUser('test@gmail.com', $scope, $http);
 
+  var currentUser = 'bob@example.com';
+ 
+  navigator.id.watch({
+    loggedInUser: currentUser,
+    onlogin: function(assertion) {
+      // A user has logged in! Here you need to:
+      // 1. Send the assertion to your backend for verification and to create a session.
+      // 2. Update your UI.
+      $http({method: 'POST', url: '/login', data: assertion }).
+        success(function(data, status, headers, config) {
+          if (data === null) {
+            console.log("couldn't login. no data returned");
+            loggedOut();
+          } else if(data.status === 'failure') {
+            console.log("couldn't login.", data.reason);
+            loggedOut();
+          } else {
+            loggedIn(data);
+          }
+        }).
+        error(function(data, status, headers, config) {
+          // called asynchronously if an error occurs
+          // or server returns response with status
+          // code outside of the <200, 400) range
+          console.log('login failure', status);
+        });
+    },
+    onlogout: function() {
+      // A user has logged out! Here you need to:
+      // Tear down the user's session by redirecting the user or making a call to your backend.
+      // Also, make sure loggedInUser will get set to null on the next page load.
+      // (That's a literal JavaScript null. Not false, 0, or undefined. null.)
+      // $.ajax({
+      //   type: 'POST',
+      //   url: '/auth/logout', // This is a URL on your website.
+      //   success: function(res, status, xhr) { window.location.reload(); },
+      //   error: function(res, status, xhr) { alert("logout failure" + res); }
+      // });
+    }
+  });
+
   //event handlers
 
   // add numbers to daily total
@@ -102,8 +143,7 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
   };
 
   $scope.signIn = function() {
-    navigator.id.get(gotAssertion);  
-    return false; 
+    navigator.id.request();
   };
 
   $scope.update = function() {

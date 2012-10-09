@@ -460,6 +460,61 @@ function roundTotal(total) {
 
 });
 
+require.define("/calc.js",function(require,module,exports,__dirname,__filename,process){// calculate totals of what I ate
+//
+// eatenFood - [{name: 'egg', qty: 10}, {name: 'chicken', qty: 1}]
+// availableFood - [{name: 'egg', cal: 80, p: 7, c: 3, f: 6}, {name: 'chicken', cals: 120, p: 7, c: 3, f: 6}]
+// result - {calories: 100, protein: 50, carbs: 12, fat: 4};
+module.exports = calculateTotal;
+
+function calculateTotal(eatenFood, availableFood) {
+  var result = {calories: 0, protein: 0, carbs: 0, fat: 0};
+
+  function calcFoodNutrition(food){
+    var filtered = availableFood.filter(function(element){
+      return (element.name === food.name)
+    });
+
+    result.calories += filtered[0].cal * food.qty;
+    result.protein += filtered[0].p* food.qty;
+    result.carbs += filtered[0].c* food.qty;
+    result.fat += filtered[0].f* food.qty;
+  };
+  
+  eatenFood.forEach(calcFoodNutrition);
+
+  return result;
+};
+
+
+});
+require("/calc.js");
+
+require.define("/calcExtra.js",function(require,module,exports,__dirname,__filename,process){// calculate totals of extra food
+//
+// availableFood - [{name: 'egg', cal: 80, p: 7, c: 3, f: 6}, {name: 'chicken', cals: 120, p: 7, c: 3, f: 6}]
+// result - {"cal":200,"p":27,"c":0,"f":11}
+module.exports = calculateExtraTotal;
+
+function calculateExtraTotal(extraFood) {
+  var result = {cal: 0, p: 0, c: 0, f: 0};
+
+  function addValues(element, index, array) {
+    result.cal += element.cal;
+    result.p += element.p;
+    result.c += element.c;
+    result.f += element.f;
+  };
+
+  extraFood.forEach(addValues);
+
+  return result;
+};
+
+
+});
+require("/calcExtra.js");
+
 require.define("/controllers.js",function(require,module,exports,__dirname,__filename,process){'use strict';
 
 /* Controllers */
@@ -484,6 +539,47 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
 
   // comment when online
   getUser('test@gmail.com', $scope, $http);
+
+  var currentUser = 'bob@example.com';
+ 
+  navigator.id.watch({
+    loggedInUser: currentUser,
+    onlogin: function(assertion) {
+      // A user has logged in! Here you need to:
+      // 1. Send the assertion to your backend for verification and to create a session.
+      // 2. Update your UI.
+      $http({method: 'POST', url: '/login', data: assertion }).
+        success(function(data, status, headers, config) {
+          if (data === null) {
+            console.log("couldn't login. no data returned");
+            loggedOut();
+          } else if(data.status === 'failure') {
+            console.log("couldn't login.", data.reason);
+            loggedOut();
+          } else {
+            loggedIn(data);
+          }
+        }).
+        error(function(data, status, headers, config) {
+          // called asynchronously if an error occurs
+          // or server returns response with status
+          // code outside of the <200, 400) range
+          console.log('login failure', status);
+        });
+    },
+    onlogout: function() {
+      // A user has logged out! Here you need to:
+      // Tear down the user's session by redirecting the user or making a call to your backend.
+      // Also, make sure loggedInUser will get set to null on the next page load.
+      // (That's a literal JavaScript null. Not false, 0, or undefined. null.)
+      // $.ajax({
+      //   type: 'POST',
+      //   url: '/auth/logout', // This is a URL on your website.
+      //   success: function(res, status, xhr) { window.location.reload(); },
+      //   error: function(res, status, xhr) { alert("logout failure" + res); }
+      // });
+    }
+  });
 
   //event handlers
 
@@ -564,8 +660,7 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
   };
 
   $scope.signIn = function() {
-    navigator.id.get(gotAssertion);  
-    return false; 
+    navigator.id.request();
   };
 
   $scope.update = function() {
@@ -802,59 +897,4 @@ angular.module('calApp').controller('FoodCtrl', function($scope, $http, $cookies
 
 });
 require("/controllers.js");
-
-require.define("/calc.js",function(require,module,exports,__dirname,__filename,process){// calculate totals of what I ate
-//
-// eatenFood - [{name: 'egg', qty: 10}, {name: 'chicken', qty: 1}]
-// availableFood - [{name: 'egg', cal: 80, p: 7, c: 3, f: 6}, {name: 'chicken', cals: 120, p: 7, c: 3, f: 6}]
-// result - {calories: 100, protein: 50, carbs: 12, fat: 4};
-module.exports = calculateTotal;
-
-function calculateTotal(eatenFood, availableFood) {
-  var result = {calories: 0, protein: 0, carbs: 0, fat: 0};
-
-  function calcFoodNutrition(food){
-    var filtered = availableFood.filter(function(element){
-      return (element.name === food.name)
-    });
-
-    result.calories += filtered[0].cal * food.qty;
-    result.protein += filtered[0].p* food.qty;
-    result.carbs += filtered[0].c* food.qty;
-    result.fat += filtered[0].f* food.qty;
-  };
-  
-  eatenFood.forEach(calcFoodNutrition);
-
-  return result;
-};
-
-
-});
-require("/calc.js");
-
-require.define("/calcExtra.js",function(require,module,exports,__dirname,__filename,process){// calculate totals of extra food
-//
-// availableFood - [{name: 'egg', cal: 80, p: 7, c: 3, f: 6}, {name: 'chicken', cals: 120, p: 7, c: 3, f: 6}]
-// result - {"cal":200,"p":27,"c":0,"f":11}
-module.exports = calculateExtraTotal;
-
-function calculateExtraTotal(extraFood) {
-  var result = {cal: 0, p: 0, c: 0, f: 0};
-
-  function addValues(element, index, array) {
-    result.cal += element.cal;
-    result.p += element.p;
-    result.c += element.c;
-    result.f += element.f;
-  };
-
-  extraFood.forEach(addValues);
-
-  return result;
-};
-
-
-});
-require("/calcExtra.js");
 })();
