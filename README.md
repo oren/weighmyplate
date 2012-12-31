@@ -55,3 +55,25 @@ install - brew install mongodb
 start - mongod  
 console - mongo  
 stop - killall mongod && rm /data/db/mongod.lock  # on debian: sudo rm /var/lib/mongodb/mongod.lock 
+
+## setting up on production box
+
+install and run the proxy package
+
+    npm install http-proxy  
+    sudo ~/nvm/v0.8.9/bin/node routes.js
+
+create routes.js file:
+
+    var httpProxy = require('http-proxy');
+    var httpOptions = {
+        router: {
+          'weighmyplate.com'   : '127.0.0.1:3000',
+          'www.weighmyplate.com'   : '127.0.0.1:3000',
+          'cleaningonthego.com'  : '127.0.0.1:4000',
+          'www.cleaningonthego.com'  : '127.0.0.1:4000'
+        }
+      };
+    var httpProxyServer = httpProxy.createServer(httpOptions);
+
+    httpProxyServer.listen(80);
