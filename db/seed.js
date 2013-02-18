@@ -43,6 +43,7 @@ function addUser() {
     { name: 'salmon', cal: 168, p: 21, c:0, f:8.8 },
     { name: 'tilapia', cal: 96, p: 20.8, c:0, f:1.7 },
     { name: 'sardins', cal: 140.19, p: 19, c:0, f:7 },
+    { name: 'wild sardins', cal: 182.5, p: 32.5, c:0, f:5 },
     { name: 'smoked herring', cal: 242, p: 21.36, c:0, f:19.58 },
     { name: 'octopus', cal: 55, p: 10, c:1.5, f:0.7 },
     { name: 'chipotle bowl', cal: 485, p: 43, c:55, f:11 },
@@ -84,7 +85,10 @@ function addUser() {
     { name: 'chestnut', cal: 10,  p: 0.2, c: 2.26, f: 0 },
     { name: 'olive', cal: 5,  p: 0.04, c: 0.2, f: 0.45 },
     { name: 'tahini 2 tbsp', cal: 90,  p: 2, c: 2, f: 8 }, //27g
-    { name: 'swiss cheese slice', cal: 106,  p: 7.54, c: 1.5, f: 7.78 } //27g
+    { name: 'swiss cheese slice', cal: 106,  p: 7.54, c: 1.5, f: 7.78 }
+    // { name: 'feta 28g', cal: 106,  p: 7.54, c: 1.5, f: 7.78 }
+    // { name: 'white bread', cal: 106,  p: 7.54, c: 1.5, f: 7.78 } 
+    // { name: 'pink salmon', cal: 106,  p: 7.54, c: 1.5, f: 7.78 } 
   ];
 
   user.extraFood = [];
