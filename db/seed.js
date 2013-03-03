@@ -54,6 +54,7 @@ function addUser() {
     { name: 'tuna - oil', cal: 200, p: 20, c:0, f:12 },
     { name: 'sashimi', cal: 115, p: 25, c:0, f:1 },
     { name: '1 scallop', cal: 35, p: 2.9, c:1.68, f:2.9 },
+    { name: 'canned salmon', cal: 180,  p: 39, c: 0, f: 3 }, 
 
     { name: 'oats 100g', cal: 375, p: 12.5, c:67.5, f:7.5 },
     { name: 'milk %1 100g', cal: 48, p: 4, c:5.6, f:1 },
@@ -74,6 +75,8 @@ function addUser() {
     { name: 'edamame 80g', cal: 120, p: 10, c:8, f:5 },
     { name: 'gioza', cal: 22, p: 2.5, c:3, f:0.3 },  // wrap + 7 grams of lean beef
     { name: 'tofu 100g', cal: 53, p: 5.8, c:2.3, f:2.3 },
+    { name: 'white bread 2 slices', cal: 133,  p: 4.6, c: 24.5, f: 1.6 },
+    { name: 'wheat bread 2 slices', cal: 157,  p: 6, c: 28.7, f: 2 },
 
     { name: 'pb 2tbsp', cal: 210,  p: 7, c: 7, f: 17 },
     { name: 'nut mix 40g', cal: 225,  p: 6.6, c: 6.6, f: 21 },
@@ -85,11 +88,8 @@ function addUser() {
     { name: 'chestnut', cal: 10,  p: 0.2, c: 2.26, f: 0 },
     { name: 'olive', cal: 5,  p: 0.04, c: 0.2, f: 0.45 },
     { name: 'tahini 2 tbsp', cal: 90,  p: 2, c: 2, f: 8 }, //27g
-    { name: 'swiss cheese slice', cal: 106,  p: 7.54, c: 1.5, f: 7.78 },
-    { name: 'white bread 2 slices', cal: 133,  p: 4.6, c: 24.5, f: 1.6 },
-    { name: 'wheat bread 2 slices', cal: 157,  p: 6, c: 28.7, f: 2 } 
+    { name: 'swiss cheese slice', cal: 106,  p: 7.54, c: 1.5, f: 7.78 }
     // { name: 'feta 28g', cal: 106,  p: 7.54, c: 1.5, f: 7.78 }
-    // { name: 'pink salmon', cal: 106,  p: 7.54, c: 1.5, f: 7.78 } 
   ];
 
   user.extraFood = [];
