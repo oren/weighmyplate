@@ -55,6 +55,7 @@ function addUser() {
     { name: 'sashimi', cal: 115, p: 25, c:0, f:1 },
     { name: '1 scallop', cal: 35, p: 2.9, c:1.68, f:2.9 },
     { name: 'canned salmon', cal: 180,  p: 39, c: 0, f: 3 }, 
+    { name: 'chicken drumsticks', cal: 78,  p: 13, c: 0, f: 2.5 }, 
 
     { name: 'oats 100g', cal: 375, p: 12.5, c:67.5, f:7.5 },
     { name: 'milk %1 100g', cal: 48, p: 4, c:5.6, f:1 },
