@@ -48,6 +48,7 @@ function addUser() {
     { name: 'octopus', cal: 55, p: 10, c:1.5, f:0.7 },
     { name: 'chipotle bowl', cal: 485, p: 43, c:55, f:11 },
     { name: 'chipotle bowl+', cal: 615, p: 44, c:59, f:24 },
+    { name: 'chipotle borito', cal: 785, p: 50, c:104, f:20.5 },
     { name: 'shrimp 10g', cal: 10, p: 2.1, c:0, f:0.1 },
     { name: 'turkey meatball', cal: 50, p: 6, c:2.5, f:2 },
     { name: 'tuna - water', cal: 100, p: 22, c:0, f:1 },
