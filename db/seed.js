@@ -44,7 +44,7 @@ function addUser() {
     { name: 'tilapia', cal: 96, p: 20.8, c:0, f:1.7 },
     { name: 'sardins', cal: 140.19, p: 19, c:0, f:7 },
     { name: 'wild sardins', cal: 182.5, p: 32.5, c:0, f:5 },
-    { name: 'smoked herring', cal: 242, p: 21.36, c:0, f:19.58 },
+    { name: 'smoked herring', cal: 350, p: 30, c:0, f:27.5 }, //rounded big can
     { name: 'octopus', cal: 55, p: 10, c:1.5, f:0.7 },
     { name: 'chipotle bowl', cal: 485, p: 43, c:55, f:11 },
     { name: 'chipotle bowl+', cal: 615, p: 44, c:59, f:24 },
